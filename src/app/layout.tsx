@@ -21,6 +21,9 @@ export const metadata: Metadata = {
   description:
     "Centraliza llamadas, equipos y atención al cliente en una sola plataforma. Sin hardware. Sin complicaciones. Tecnología de net2phone. Implementación en 72 horas.",
   keywords: "edanka, comunicaciones empresariales, net2phone, VoIP México, centralita virtual, contact center",
+  icons: {
+    icon: [{ url: '/logo.ico', sizes: '32x32', type: 'image/x-icon' }],
+  },
 };
 
 export default function RootLayout({
