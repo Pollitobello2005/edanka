@@ -40,11 +40,13 @@ export default function SocialProof() {
         </motion.p>
 
         <div className="partner-logos py-6 px-6">
-          {logos.map((logo) => (
-            <div key={logo.name} className="partner-logo flex items-center justify-center min-w-[100px] md:min-w-[140px]">
-              <Image src={logo.src} alt={`Logo de ${logo.name}`} width={140} height={64} className="max-h-12 w-auto object-contain" />
-            </div>
-          ))}
+          <div className="partner-track">
+            {carouselLogos.map((logo, i) => (
+              <div key={`${logo.name}-${i}`} className="partner-logo flex items-center justify-center min-w-[100px] md:min-w-[140px]">
+                <Image src={logo.src} alt={`Logo de ${logo.name}`} width={140} height={64} className="max-h-12 w-auto object-contain" />
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Trust bar */}

@@ -110,7 +110,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-sm font-medium mb-8 flex items-center gap-2 flex-wrap"
-              style={{ color: '#1A56DB' }}
+              style={{ color: '#519cb5' }}
             >
               <span>+500 empresas en México</span>
               <span style={{ color: 'var(--color-text-label)' }}>·</span>
@@ -168,8 +168,8 @@ export default function Hero() {
                   <p className="text-[#0F0F0F] font-semibold text-base">Resumen en tiempo real</p>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-[#1A56DB]" />
-                  <span className="text-xs text-[#1A56DB] font-medium">En vivo</span>
+                  <span className="w-2 h-2 rounded-full bg-[#519cb5]" />
+                  <span className="text-xs text-[#519cb5] font-medium">En vivo</span>
                 </div>
               </div>
 
@@ -198,7 +198,7 @@ export default function Hero() {
               >
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-xs font-medium" style={{ color: '#9CA3AF' }}>Llamadas últimas 7 horas</span>
-                  <span className="text-xs text-[#1A56DB] font-semibold">↑ 12%</span>
+                  <span className="text-xs text-[#519cb5] font-semibold">↑ 12%</span>
                 </div>
                 <div className="flex items-end gap-1.5 h-14">
                   {[35, 55, 45, 70, 60, 85, 75].map((h, i) => (
@@ -210,7 +210,7 @@ export default function Hero() {
                       className="flex-1 rounded-t-sm origin-bottom"
                       style={{
                         height: `${h}%`,
-                        background: i === 5 ? '#1A56DB' : 'rgba(26,86,219,0.25)',
+                        background: i === 5 ? '#519cb5' : 'rgba(81,156,181,0.25)',
                       }}
                     />
                   ))}

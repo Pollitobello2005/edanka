@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 const testimonials = [
   {
@@ -25,6 +25,28 @@ export default function Testimonials() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
   const [index, setIndex] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)');
+    const onChange = (e: MediaQueryListEvent | MediaQueryList) => setIsDesktop((e as any).matches ?? mq.matches);
+    setIsDesktop(mq.matches);
+    if (mq.addEventListener) mq.addEventListener('change', onChange as any);
+    else mq.addListener(onChange as any);
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener('change', onChange as any);
+      else mq.removeListener(onChange as any);
+    };
+  }, []);
+
+  // Autoplay only on desktop: advance every 4s
+  useEffect(() => {
+    if (!isDesktop) return;
+    const id = setInterval(() => {
+      setIndex((i) => (i + 1) % testimonials.length);
+    }, 4000);
+    return () => clearInterval(id);
+  }, [isDesktop]);
 
   const t = testimonials[index];
 
@@ -54,7 +76,7 @@ export default function Testimonials() {
         >
           <div className="flex items-start gap-6">
             <div className="flex-shrink-0">
-              <div className="w-10 h-10 rounded-full bg-[#E5E7EB]" />
+              <div className="w-10 h-10 rounded-full bg-[#E5E7EB] testimonial-avatar" />
             </div>
 
             <div>

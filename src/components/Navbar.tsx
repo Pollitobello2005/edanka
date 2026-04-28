@@ -37,30 +37,27 @@ export default function Navbar() {
           borderBottom: scrolled ? '1px solid rgba(13,21,38,0.06)' : '1px solid transparent',
         }}
       >
-        <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <nav className="max-w-7xl mx-auto px-6 h-40 flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
+          <a href="#" className="flex items-center group -translate-y-8 transform">
             <Image
               src="/iconoedanka.png"
               alt="Edanka"
-              width={32}
-              height={32}
-              className="w-8 h-8 object-contain"
+              width={160}
+              height={160}
+              className="w-40 h-40 object-contain"
             />
-            <span className="text-[#0F0F0F] font-bold text-xl tracking-tight">
-              Edanka
-            </span>
           </a>
 
           {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-8 -translate-y-8 transform">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 className="text-sm font-medium transition-colors duration-200"
                 style={{ color: '#6B7280' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#1A56DB')}
+                onMouseEnter={e => (e.currentTarget.style.color = '#519cb5')}
                 onMouseLeave={e => (e.currentTarget.style.color = '#6B7280')}
               >
                 {link.label}
@@ -69,7 +66,7 @@ export default function Navbar() {
           </div>
 
           {/* CTA */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-3 -translate-y-8 transform">
             <Link
               href="/agenda-reunion"
               className="btn-primary px-5 py-2.5 text-sm rounded-lg font-semibold"
@@ -80,7 +77,7 @@ export default function Navbar() {
 
           {/* Mobile burger */}
           <button
-            className="md:hidden text-[#0F0F0F] p-2"
+            className="md:hidden text-[#0F0F0F] p-2 -translate-y-6 transform"
             onClick={() => setMobileOpen(v => !v)}
             aria-label="Menú"
           >

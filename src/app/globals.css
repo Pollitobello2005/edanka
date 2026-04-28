@@ -21,7 +21,7 @@
   /* Edanka Light Theme Colors (simplified) */
   --color-edanka-bg: #FFFFFF;
   --color-edanka-muted: #F9FAFB;
-  --color-edanka-primary: #1A56DB;
+  --color-edanka-primary: #519cb5;
   --color-text-title: #0F0F0F;
   --color-text-body: #6B7280;
   --color-text-label: #9CA3AF;
@@ -75,7 +75,7 @@
   h3 { font-weight: 600 !important; }
 
   ::selection {
-    background-color: rgba(26, 86, 219, 0.18);
+    background-color: rgba(81, 156, 181, 0.18);
     color: #0F0F0F;
   }
 
@@ -86,11 +86,11 @@
     background: #F9FAFB;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(26, 86, 219, 0.3);
+    background: rgba(81, 156, 181, 0.3);
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(26, 86, 219, 0.6);
+    background: rgba(81, 156, 181, 0.6);
   }
 }
 
@@ -248,12 +248,36 @@
 .stats-row .stat-label { font-size: 13px; color: var(--color-text-body); }
 
 /* Partner logos */
-.partner-logos { display:flex; gap:28px; align-items:center; justify-content:center; flex-wrap:nowrap; }
+.partner-logos { display:flex; gap:28px; align-items:center; justify-content:center; flex-wrap:nowrap; overflow:hidden; }
+.partner-track { display:flex; gap:28px; align-items:center; width: max-content; }
 .partner-logo { filter: grayscale(100%); opacity:0.4; transition: filter 300ms ease, opacity 300ms ease, transform 300ms ease; }
 .partner-logo:hover { filter: grayscale(0%); opacity:1; transform: translateY(-3px); }
 
+/* marquee animation only on small screens */
+@media (max-width: 767px) {
+  .partner-track {
+    animation: scroll-x 28s linear infinite;
+    will-change: transform;
+  }
+  .partner-track:hover {
+    animation-play-state: paused;
+  }
+}
+
 /* Testimonials */
-.testimonial-quote-decor { font-size: 80px; opacity: 0.06; line-height: 0.8; }
+.testimonial-quote-decor {
+  font-size: 80px;
+  opacity: 0.12;
+  line-height: 0.8;
+  color: var(--color-text-title);
+  margin-bottom: -12px;
+}
+
+/* Testimonial avatar tweak to be visible on white backgrounds */
+.testimonial-avatar {
+  background: var(--color-border) !important;
+  box-shadow: 0 4px 12px rgba(16,24,40,0.04);
+}
 
 /* Misc helpers */
 .max-text-width { max-width: 680px; }

@@ -45,7 +45,7 @@ export default function Footer() {
               }}
             >
               <Zap size={20} strokeWidth={1.5} color="#6b7280" />
-              <span className="text-xs" style={{ color: '#1A56DB' }}>
+              <span className="text-xs" style={{ color: '#519cb5' }}>
                 Tecnología de <strong>net2phone</strong>
               </span>
             </div>
@@ -63,7 +63,7 @@ export default function Footer() {
                     href={link.href}
                     className="text-sm transition-colors duration-200"
                     style={{ color: '#6B7280' }}
-                    onMouseEnter={e => (e.currentTarget.style.color = '#1A56DB')}
+                    onMouseEnter={e => (e.currentTarget.style.color = '#519cb5')}
                     onMouseLeave={e => (e.currentTarget.style.color = '#6B7280')}
                   >
                     {link.label}
@@ -84,7 +84,7 @@ export default function Footer() {
                   href="tel:+523312345678"
                   className="flex items-center gap-2 text-sm transition-colors duration-200"
                   style={{ color: '#6B7280' }}
-                  onMouseEnter={e => (e.currentTarget.style.color = '#1A56DB')}
+                  onMouseEnter={e => (e.currentTarget.style.color = '#519cb5')}
                   onMouseLeave={e => (e.currentTarget.style.color = '#6B7280')}
                 >
                   <Phone size={20} strokeWidth={1.5} color="#6b7280" />
@@ -96,7 +96,7 @@ export default function Footer() {
                   href="mailto:ventas@edanka.mx"
                   className="flex items-center gap-2 text-sm transition-colors duration-200"
                   style={{ color: '#6B7280' }}
-                  onMouseEnter={e => (e.currentTarget.style.color = '#1A56DB')}
+                  onMouseEnter={e => (e.currentTarget.style.color = '#519cb5')}
                   onMouseLeave={e => (e.currentTarget.style.color = '#6B7280')}
                 >
                   <Mail size={20} strokeWidth={1.5} color="#6b7280" />
