@@ -51,10 +51,10 @@ export default function CTA() {
               <ArrowRight size={18} />
             </Link>
             <a
-              href="https://wa.me/5213312345678?text=Hola, quiero más información sobre Edanka"
+              href="https://wa.me/523344863113?text=Hola, quiero más información sobre Edanka"
               target="_blank"
               rel="noreferrer"
-              className="btn-ghost px-8 py-4 text-base font-medium flex items-center justify-center gap-2 rounded-xl"
+                className="btn-ghost px-7 py-3.5 text-base font-medium flex items-center gap-2 rounded-lg"
               style={{ minWidth: '200px', borderColor: '#ffffff', color: '#ffffff' }}
             >
               <MessageCircle size={20} strokeWidth={1.5} color="#ffffff" />

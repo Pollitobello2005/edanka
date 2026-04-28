@@ -155,7 +155,7 @@ export default function Hero() {
                 <ArrowRight size={18} />
               </Link>
               <a
-                href="https://wa.me/5213312345678"
+                href="https://wa.me/523344863113"
                 target="_blank"
                 rel="noreferrer"
                 className="btn-ghost px-7 py-3.5 text-base font-medium flex items-center gap-2 rounded-lg"

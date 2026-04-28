@@ -264,21 +264,6 @@
   }
 }
 
-/* Testimonials */
-.testimonial-quote-decor {
-  font-size: 80px;
-  opacity: 0.12;
-  line-height: 0.8;
-  color: var(--color-text-title);
-  margin-bottom: -12px;
-}
-
-/* Testimonial avatar tweak to be visible on white backgrounds */
-.testimonial-avatar {
-  background: var(--color-border) !important;
-  box-shadow: 0 4px 12px rgba(16,24,40,0.04);
-}
-
 /* Misc helpers */
 .max-text-width { max-width: 680px; }
 

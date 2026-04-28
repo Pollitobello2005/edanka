@@ -60,7 +60,7 @@ export default function CTA() {
               <ArrowRight size={18} />
             </Link>
             <a
-              href="https://wa.me/5213312345678?text=Hola, quiero más información sobre Edanka para mi clínica"
+              href="https://wa.me/523344863113?text=Hola, quiero más información sobre Edanka para mi clínica"
               target="_blank"
               rel="noreferrer"
               className="btn-ghost px-8 py-4 text-base font-medium flex items-center justify-center gap-2 rounded-xl"

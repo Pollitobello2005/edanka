@@ -19,8 +19,8 @@ function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
           ref.current.textContent = Math.round(value).toLocaleString('es-MX') + suffix;
         }
       },
-    });
-    return () => controls.stop();
+              <a
+                href="https://wa.me/523344863113"
   }, [inView, target, suffix]);
 
   return <span ref={ref}>0{suffix}</span>;

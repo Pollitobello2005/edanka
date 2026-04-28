@@ -1,6 +1,6 @@
 'use client';
 
-import { Zap, Phone, Mail, MapPin } from 'lucide-react';
+import { Zap, Phone, Mail, MapPin, Linkedin } from 'lucide-react';
 import Image from 'next/image';
 
 const footerLinks = [
@@ -36,18 +36,25 @@ export default function Footer() {
             <p className="text-sm leading-relaxed mb-4" style={{ color: '#6B7280', maxWidth: '260px' }}>
               Comunicaciones empresariales en la nube. Sin hardware. Sin complicaciones. En 72 horas.
             </p>
-            {/* net2phone badge */}
-            <div
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full"
-              style={{
-                background: 'transparent',
-                border: '1px solid #e5e7eb',
-              }}
-            >
-              <Zap size={20} strokeWidth={1.5} color="#6b7280" />
-              <span className="text-xs" style={{ color: '#519cb5' }}>
-                Tecnología de <strong>net2phone</strong>
-              </span>
+            {/* net2phone badge and social */}
+            <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+              <div
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full"
+                style={{
+                  background: 'transparent',
+                  border: '1px solid #e5e7eb',
+                }}
+              >
+                <Zap size={20} strokeWidth={1.5} color="#6b7280" />
+                <span className="text-xs" style={{ color: '#519cb5' }}>
+                  Tecnología de <strong>net2phone</strong>
+                </span>
+              </div>
+
+              <a href="https://www.linkedin.com/company/edankamx" target="_blank" rel="noreferrer" aria-label="Edanka en LinkedIn" className="text-sm flex items-center gap-2" style={{ color: '#6B7280' }}>
+                <Linkedin size={18} strokeWidth={1.5} color="#6b7280" />
+                <span className="text-xs" style={{ color: '#6B7280' }}>LinkedIn</span>
+              </a>
             </div>
           </div>
 
