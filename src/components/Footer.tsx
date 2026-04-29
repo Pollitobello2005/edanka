@@ -46,9 +46,8 @@ export default function Footer() {
                 }}
               >
                 <Zap size={20} strokeWidth={1.5} color="#6b7280" />
-                <span className="text-xs" style={{ color: '#519cb5' }}>
-                  Tecnología de <strong>net2phone</strong>
-                </span>
+                <span className="text-xs" style={{ color: '#6B7280' }}>Partners de</span>
+                <Image src="/logos/net2phone.svg" alt="net2phone" width={100} height={28} className="h-6 w-auto" />
               </div>
 
               <a href="https://www.linkedin.com/company/edankamx" target="_blank" rel="noreferrer" aria-label="Edanka en LinkedIn" className="text-sm flex items-center gap-2" style={{ color: '#6B7280' }}>
@@ -129,8 +128,9 @@ export default function Footer() {
             <p style={{ color: '#9CA3AF', fontSize: 12 }}>
               © {new Date().getFullYear()} Edanka. Todos los derechos reservados.
             </p>
-            <p style={{ color: '#9CA3AF', fontSize: 12 }}>
-              Plataforma impulsada por net2phone
+            <p style={{ color: '#9CA3AF', fontSize: 12 }} className="flex items-center gap-2">
+              Plataforma impulsada por
+              <Image src="/logos/net2phone.svg" alt="net2phone" width={90} height={24} className="h-5 w-auto" />
             </p>
           </div>
         </div>
