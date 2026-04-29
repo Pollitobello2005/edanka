@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState, createElement, useCallback } from 'react';
+import { useEffect, useMemo, useRef, useState, createElement, useCallback, type CSSProperties, type ElementType } from 'react';
 import { gsap } from 'gsap';
 import './TextType.css';
 
 type TextTypeProps = {
   text: string | string[];
-  as?: keyof JSX.IntrinsicElements;
+  as?: ElementType;
   typingSpeed?: number;
   initialDelay?: number;
   pauseDuration?: number;
@@ -23,6 +23,7 @@ type TextTypeProps = {
   onSentenceComplete?: (sentence: string, index: number) => void;
   startOnVisible?: boolean;
   reverseMode?: boolean;
+  style?: CSSProperties;
 };
 
 export default function TextType({
