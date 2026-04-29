@@ -87,10 +87,9 @@ export default function Stepper({
             const isNotLastStep = index < totalSteps - 1;
 
             return (
-              <>
+              <div key={stepNumber} className="stepper-step-group">
                 {renderStepIndicator ? (
                   <button
-                    key={`indicator-${stepNumber}`}
                     type="button"
                     className={`stepper-indicator ${disableStepIndicators ? 'is-disabled' : ''}`}
                     onClick={() => {
@@ -122,7 +121,7 @@ export default function Stepper({
                   </button>
                 )}
                 {isNotLastStep && <span className={`stepper-connector ${currentStep > stepNumber ? 'is-complete' : ''}`} />}
-              </>
+              </div>
             );
           })}
         </div>
