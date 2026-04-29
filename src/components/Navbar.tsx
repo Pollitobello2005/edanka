@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
+import GooeyNav from './GooeyNav';
 
 const navLinks = [
   { label: 'Soluciones', href: '#solucion' },
@@ -37,7 +38,7 @@ export default function Navbar() {
           borderBottom: scrolled ? '1px solid rgba(13,21,38,0.06)' : '1px solid transparent',
         }}
       >
-        <nav className="max-w-7xl mx-auto px-6 h-40 flex items-center justify-between">
+        <nav className="max-w-7xl mx-auto px-6 h-40 flex items-center justify-between gap-4">
           {/* Logo */}
           <a href="#" className="flex items-center group -translate-y-8 transform">
             <Image
@@ -50,19 +51,8 @@ export default function Navbar() {
           </a>
 
           {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-8 -translate-y-8 transform">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="text-sm font-medium transition-colors duration-200"
-                style={{ color: '#6B7280' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#519cb5')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#6B7280')}
-              >
-                {link.label}
-              </a>
-            ))}
+          <div className="hidden md:flex flex-1 justify-center -translate-y-8 transform">
+            <GooeyNav items={navLinks} />
           </div>
 
           {/* CTA */}
