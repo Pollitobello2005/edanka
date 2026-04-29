@@ -74,6 +74,7 @@ export default function Hero() {
             >
               <div className="flex items-center gap-2 text-sm font-medium" style={{ color: 'var(--color-text-label)' }}>
                 <span className="inline-block w-[6px] h-[6px] rounded-full" style={{ background: 'var(--primary)', animation: 'blink 1.4s infinite' }} />
+                <span>Partners de</span>
                 <Image src="/logos/net2phone.svg" alt="net2phone" width={120} height={32} className="h-8 w-auto" />
               </div>
             </motion.div>
