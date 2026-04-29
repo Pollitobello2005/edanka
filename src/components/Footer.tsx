@@ -1,6 +1,6 @@
 'use client';
 
-import { Zap, Phone, Mail, MapPin, Linkedin } from 'lucide-react';
+import { Zap, Phone, Mail, MapPin } from 'lucide-react';
 import Image from 'next/image';
 
 const footerLinks = [
@@ -52,7 +52,10 @@ export default function Footer() {
               </div>
 
               <a href="https://www.linkedin.com/company/edankamx" target="_blank" rel="noreferrer" aria-label="Edanka en LinkedIn" className="text-sm flex items-center gap-2" style={{ color: '#6B7280' }}>
-                <Linkedin size={18} strokeWidth={1.5} color="#6b7280" />
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <rect x="2" y="2" width="20" height="20" rx="3" stroke="#6b7280" strokeWidth="1.5" fill="transparent" />
+                  <path d="M6.5 9.5V18M6.5 7.5V7.52M10 18V12.5c0-2 .5-3.5 2.5-3.5 1.8 0 2 1.6 2 3.3V18" stroke="#6b7280" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
                 <span className="text-xs" style={{ color: '#6B7280' }}>LinkedIn</span>
               </a>
             </div>
