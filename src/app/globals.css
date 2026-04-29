@@ -247,18 +247,22 @@
 .stats-row .stat-number { font-size: 40px; font-weight: 500; color: var(--color-text-title); }
 .stats-row .stat-label { font-size: 13px; color: var(--color-text-body); }
 
-/* Partner logos */
 .partner-logos { display:flex; gap:28px; align-items:center; justify-content:center; flex-wrap:nowrap; overflow:hidden; }
-.partner-track { display:flex; gap:28px; align-items:center; width: max-content; }
+.partner-track { display:flex; gap:28px; align-items:center; width: max-content; animation: scroll-x 40s linear infinite; will-change: transform; }
 .partner-logo { filter: grayscale(100%); opacity:0.4; transition: filter 300ms ease, opacity 300ms ease, transform 300ms ease; }
 .partner-logo:hover { filter: grayscale(0%); opacity:1; transform: translateY(-3px); }
 
-/* marquee animation only on small screens */
+/* Faster marquee on small screens */
 @media (max-width: 767px) {
   .partner-track {
-    animation: scroll-x 28s linear infinite;
-    will-change: transform;
+    animation-duration: 28s;
   }
+  .partner-track:hover {
+    animation-play-state: paused;
+  }
+}
+
+@media (min-width: 768px) {
   .partner-track:hover {
     animation-play-state: paused;
   }
