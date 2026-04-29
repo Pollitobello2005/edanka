@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 import { motion, useInView, animate } from 'framer-motion';
 import { ArrowRight, MessageCircle, Phone, TrendingUp, Users } from 'lucide-react';
+import TextType from './TextType';
 
 function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -105,6 +106,31 @@ export default function Hero() {
               Centraliza llamadas, equipos y atención al cliente en una sola plataforma.
               Sin hardware. Sin complicaciones.
             </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.24 }}
+              className="mb-6"
+            >
+              <TextType
+                as="p"
+                text={[
+                  'Atiende más rápido.',
+                  'No pierdas llamadas.',
+                  'Centraliza tu operación.',
+                ]}
+                typingSpeed={55}
+                pauseDuration={1200}
+                deletingSpeed={26}
+                className="text-sm md:text-base font-medium"
+                style={{ color: '#519cb5' }}
+                showCursor={true}
+                cursorCharacter="|"
+                startOnVisible={true}
+                textColors={['#519cb5']}
+              />
+            </motion.div>
 
             {/* Trust line */}
             <motion.p
