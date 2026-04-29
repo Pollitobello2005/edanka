@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 import { motion, useInView, animate } from 'framer-motion';
 import { ArrowRight, MessageCircle, Phone, Calendar, Users } from 'lucide-react';
@@ -135,7 +136,7 @@ export default function Hero() {
             >
               <span className="flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" />
-                Tecnología de net2phone
+                <Image src="/logos/net2phone.svg" alt="net2phone" width={100} height={28} className="h-7 w-auto" />
               </span>
               <span style={{ color: 'rgba(13,21,38,0.2)' }}>|</span>
               <span>Implementación en 72 hrs</span>
