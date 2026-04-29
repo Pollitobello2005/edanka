@@ -31,7 +31,6 @@ export default function Footer() {
                 height={32}
                 className="w-8 h-8 object-contain"
               />
-              <span className="text-[#0F0F0F] font-bold text-xl tracking-tight">Edanka</span>
             </a>
             <p className="text-sm leading-relaxed mb-4" style={{ color: '#6B7280', maxWidth: '260px' }}>
               Comunicaciones empresariales en la nube. Sin hardware. Sin complicaciones. En 72 horas.
