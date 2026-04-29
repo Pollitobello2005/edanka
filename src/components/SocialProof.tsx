@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
+import CountUp from './CountUp';
 
 const logos = [
   { name: 'Danone', src: '/logos/danone.svg' },
@@ -57,10 +58,22 @@ export default function SocialProof() {
           transition={{ duration: 0.5, delay: 0.5 }}
           className="stats-row mt-8"
         >
-          <div className="text-center"><div className="stat-number">+500</div><div className="stat-label">Empresas en México</div></div>
-          <div className="text-center"><div className="stat-number">72h</div><div className="stat-label">Implementación promedio</div></div>
-          <div className="text-center"><div className="stat-number">99.99%</div><div className="stat-label">Uptime garantizado</div></div>
-          <div className="text-center"><div className="stat-number">24/7</div><div className="stat-label">Soporte en español</div></div>
+          <div className="text-center">
+            <div className="stat-number"><CountUp to={500} duration={1.3} separator="," prefix="+" /></div>
+            <div className="stat-label">Empresas en México</div>
+          </div>
+          <div className="text-center">
+            <div className="stat-number"><CountUp to={72} duration={1.1} suffix="h" /></div>
+            <div className="stat-label">Implementación promedio</div>
+          </div>
+          <div className="text-center">
+            <div className="stat-number"><CountUp to={99.99} duration={1.4} suffix="%" /></div>
+            <div className="stat-label">Uptime garantizado</div>
+          </div>
+          <div className="text-center">
+            <div className="stat-number"><CountUp to={24} duration={1.15} suffix="/7" /></div>
+            <div className="stat-label">Soporte en español</div>
+          </div>
         </motion.div>
       </div>
     </section>
