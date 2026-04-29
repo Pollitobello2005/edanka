@@ -19,8 +19,8 @@ function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
           ref.current.textContent = Math.round(value).toLocaleString('es-MX') + suffix;
         }
       },
-              <a
-                href="https://wa.me/523344863113"
+    });
+    return () => controls.stop();
   }, [inView, target, suffix]);
 
   return <span ref={ref}>0{suffix}</span>;
@@ -132,7 +132,7 @@ export default function Hero() {
                 <ArrowRight size={18} />
               </Link>
               <a
-                href="https://wa.me/5213312345678"
+                href="https://wa.me/523344863113"
                 target="_blank"
                 rel="noreferrer"
                 className="btn-ghost px-7 py-3.5 text-base font-medium flex items-center gap-2 rounded-lg"
