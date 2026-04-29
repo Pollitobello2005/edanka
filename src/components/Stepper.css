@@ -78,10 +78,13 @@
 
 .stepper-content {
   min-height: 24rem;
+  width: 100%;
 }
 
 .stepper-step {
   padding: 1.35rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .stepper-footer {

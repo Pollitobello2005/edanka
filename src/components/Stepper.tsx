@@ -167,7 +167,7 @@ function StepperContentWrapper({
   return (
     <motion.div
       className={className}
-      style={{ position: 'relative', overflow: 'hidden' }}
+      style={{ position: 'relative', overflow: 'hidden', width: '100%' }}
       animate={{ height: isCompleted ? 0 : parentHeight }}
       transition={{ type: 'spring', duration: 0.45 }}
     >
@@ -208,7 +208,7 @@ function SlideTransition({
       animate="center"
       exit="exit"
       transition={{ duration: 0.4 }}
-      style={{ position: 'absolute', inset: 0 }}
+      style={{ position: 'absolute', inset: 0, width: '100%' }}
     >
       {children}
     </motion.div>
