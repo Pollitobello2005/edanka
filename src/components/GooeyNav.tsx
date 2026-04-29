@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, type KeyboardEvent, type MouseEvent } from 'react';
+import { useState, type KeyboardEvent, type MouseEvent } from 'react';
 
 type GooeyNavItem = {
   label: string;
@@ -9,396 +9,125 @@ type GooeyNavItem = {
 
 type GooeyNavProps = {
   items: GooeyNavItem[];
-  animationTime?: number;
-  particleCount?: number;
-  particleDistances?: [number, number];
-  particleR?: number;
-  timeVariance?: number;
-  colors?: number[];
   initialActiveIndex?: number;
 };
 
-const defaultColors = [1, 2, 3, 1, 2, 3, 1, 4];
-
-export default function GooeyNav({
-  items,
-  animationTime = 600,
-  particleCount = 15,
-  particleDistances = [90, 10],
-  particleR = 100,
-  timeVariance = 300,
-  colors = defaultColors,
-  initialActiveIndex = 0,
-}: GooeyNavProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const navRef = useRef<HTMLUListElement>(null);
-  const filterRef = useRef<HTMLSpanElement>(null);
-  const textRef = useRef<HTMLSpanElement>(null);
+export default function GooeyNav({ items, initialActiveIndex = 0 }: GooeyNavProps) {
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
 
-  const noise = (n = 1) => n / 2 - Math.random() * n;
-
-  const getXY = (distance: number, pointIndex: number, totalPoints: number) => {
-    const angle = ((360 + noise(8)) / totalPoints) * pointIndex * (Math.PI / 180);
-    return [distance * Math.cos(angle), distance * Math.sin(angle)] as const;
-  };
-
-  const createParticle = (i: number, t: number, d: [number, number], r: number) => {
-    const rotate = noise(r / 10);
-    return {
-      start: getXY(d[0], particleCount - i, particleCount),
-      end: getXY(d[1] + noise(7), particleCount - i, particleCount),
-      time: t,
-      scale: 1 + noise(0.2),
-      color: colors[Math.floor(Math.random() * colors.length)],
-      rotate: rotate > 0 ? (rotate + r / 20) * 10 : (rotate - r / 20) * 10,
-    };
-  };
-
-  const makeParticles = (element: HTMLElement) => {
-    const d = particleDistances;
-    const r = particleR;
-    const bubbleTime = animationTime * 2 + timeVariance;
-    element.style.setProperty('--time', `${bubbleTime}ms`);
-
-    for (let i = 0; i < particleCount; i += 1) {
-      const t = animationTime * 2 + noise(timeVariance * 2);
-      const p = createParticle(i, t, d, r);
-      element.classList.remove('active');
-
-      window.setTimeout(() => {
-        const particle = document.createElement('span');
-        const point = document.createElement('span');
-        particle.classList.add('particle');
-        particle.style.setProperty('--start-x', `${p.start[0]}px`);
-        particle.style.setProperty('--start-y', `${p.start[1]}px`);
-        particle.style.setProperty('--end-x', `${p.end[0]}px`);
-        particle.style.setProperty('--end-y', `${p.end[1]}px`);
-        particle.style.setProperty('--time', `${p.time}ms`);
-        particle.style.setProperty('--scale', `${p.scale}`);
-        particle.style.setProperty('--color', `var(--color-${p.color}, white)`);
-        particle.style.setProperty('--rotate', `${p.rotate}deg`);
-
-        point.classList.add('point');
-        particle.appendChild(point);
-        element.appendChild(particle);
-
-        requestAnimationFrame(() => {
-          element.classList.add('active');
-        });
-
-        window.setTimeout(() => {
-          particle.remove();
-        }, t);
-      }, 30);
-    }
-  };
-
-  const updateEffectPosition = (element: HTMLElement) => {
-    if (!containerRef.current || !filterRef.current || !textRef.current) return;
-    const containerRect = containerRef.current.getBoundingClientRect();
-    const pos = element.getBoundingClientRect();
-
-    const styles = {
-      left: `${pos.x - containerRect.x}px`,
-      top: `${pos.y - containerRect.y}px`,
-      width: `${pos.width}px`,
-      height: `${pos.height}px`,
-    };
-
-    Object.assign(filterRef.current.style, styles);
-    Object.assign(textRef.current.style, styles);
-    textRef.current.innerText = element.innerText;
-  };
-
-  const activateItem = (liElement: HTMLLIElement, index: number) => {
-    if (!liElement || activeIndex === index) return;
-
-    setActiveIndex(index);
-    updateEffectPosition(liElement);
-
-    if (filterRef.current) {
-      filterRef.current.querySelectorAll('.particle').forEach(particle => particle.remove());
-    }
-
-    if (textRef.current) {
-      textRef.current.classList.remove('active');
-      void textRef.current.offsetWidth;
-      textRef.current.classList.add('active');
-    }
-
-    if (filterRef.current) {
-      makeParticles(filterRef.current);
-    }
-  };
-
   const handleClick = (event: MouseEvent<HTMLAnchorElement>, index: number) => {
-    const liElement = event.currentTarget.closest('li') as HTMLLIElement | null;
-    if (liElement) {
-      activateItem(liElement, index);
+    event.preventDefault();
+    setActiveIndex(index);
+
+    const href = items[index]?.href;
+    if (!href) return;
+
+    if (href.startsWith('#')) {
+      const target = document.querySelector(href);
+      target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
     }
+
+    window.location.href = href;
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLAnchorElement>, index: number) => {
     if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      const liElement = event.currentTarget.closest('li') as HTMLLIElement | null;
-      if (liElement) {
-        activateItem(liElement, index);
-      }
+      handleClick(event as unknown as MouseEvent<HTMLAnchorElement>, index);
     }
   };
 
-  useEffect(() => {
-    if (!navRef.current || !containerRef.current) return;
-    const activeLi = navRef.current.querySelectorAll('li')[activeIndex] as HTMLLIElement | undefined;
-    if (activeLi) {
-      updateEffectPosition(activeLi);
-      textRef.current?.classList.add('active');
-    }
-
-    const resizeObserver = new ResizeObserver(() => {
-      const currentActiveLi = navRef.current?.querySelectorAll('li')[activeIndex] as HTMLLIElement | undefined;
-      if (currentActiveLi) updateEffectPosition(currentActiveLi);
-    });
-
-    resizeObserver.observe(containerRef.current);
-    return () => resizeObserver.disconnect();
-  }, [activeIndex]);
-
   return (
-    <div className="gooey-nav-container" ref={containerRef}>
-      <nav>
-        <ul ref={navRef}>
-          {items.map((item, index) => (
-            <li key={item.label} className={activeIndex === index ? 'active' : ''}>
+    <nav className="gooey-nav" aria-label="Navegación principal">
+      <ul className="gooey-nav-list">
+        {items.map((item, index) => {
+          const isActive = activeIndex === index;
+
+          return (
+            <li key={item.label} className={`gooey-nav-item ${isActive ? 'is-active' : ''}`}>
               <a href={item.href} onClick={event => handleClick(event, index)} onKeyDown={event => handleKeyDown(event, index)}>
                 {item.label}
               </a>
             </li>
-          ))}
-        </ul>
-      </nav>
-      <span className="effect filter" ref={filterRef} />
-      <span className="effect text" ref={textRef} />
+          );
+        })}
+      </ul>
 
       <style jsx global>{`
-        .gooey-nav-container {
-          position: relative;
+        .gooey-nav {
+          display: inline-flex;
+          align-items: center;
         }
 
-        .gooey-nav-container nav {
-          display: flex;
-          position: relative;
-          transform: translate3d(0, 0, 0.01px);
-        }
-
-        .gooey-nav-container nav ul {
-          display: flex;
+        .gooey-nav-list {
+          display: inline-flex;
+          align-items: center;
           gap: 0.5rem;
           list-style: none;
-          padding: 0.35rem;
           margin: 0;
-          position: relative;
-          z-index: 3;
-          color: #0f0f0f;
-          border: 1px solid rgba(13, 21, 38, 0.08);
+          padding: 0.35rem;
           border-radius: 999px;
+          border: 1px solid rgba(13, 21, 38, 0.08);
           background: rgba(255, 255, 255, 0.82);
           backdrop-filter: blur(18px);
           box-shadow: 0 12px 36px rgba(13, 21, 38, 0.06);
         }
 
-        .gooey-nav-container nav ul li {
-          border-radius: 999px;
+        .gooey-nav-item {
           position: relative;
-          cursor: pointer;
-          transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-          box-shadow: 0 0 0.5px 1.5px transparent;
-          color: #6b7280;
+          border-radius: 999px;
+          transition: transform 180ms ease, color 180ms ease, background-color 180ms ease;
         }
 
-        .gooey-nav-container nav ul li a {
-          display: inline-block;
-          padding: 0.65rem 1rem;
+        .gooey-nav-item a {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.7rem 1rem;
+          border-radius: 999px;
           font-size: 0.875rem;
           font-weight: 500;
           line-height: 1;
+          color: #6b7280;
+          transition: color 180ms ease, transform 180ms ease;
         }
 
-        .gooey-nav-container nav ul li:focus-within:has(:focus-visible) {
-          box-shadow: 0 0 0.5px 1.5px rgba(81, 156, 181, 0.6);
+        .gooey-nav-item:hover {
+          transform: translateY(-1px);
         }
 
-        .gooey-nav-container nav ul li::after {
+        .gooey-nav-item:hover a,
+        .gooey-nav-item.is-active a {
+          color: #ffffff;
+        }
+
+        .gooey-nav-item::after {
           content: '';
           position: absolute;
           inset: 0;
           border-radius: 999px;
-          background: linear-gradient(135deg, rgba(81, 156, 181, 1), rgba(81, 156, 181, 0.88));
+          background: var(--primary);
           opacity: 0;
-          transform: scale(0.96);
-          transition: all 0.3s ease;
+          transform: scale(0.92);
+          transition: opacity 220ms ease, transform 220ms ease;
           z-index: -1;
         }
 
-        .gooey-nav-container nav ul li.active {
-          color: #ffffff;
-          text-shadow: none;
-        }
-
-        .gooey-nav-container nav ul li.active::after {
+        .gooey-nav-item.is-active::after {
           opacity: 1;
           transform: scale(1);
         }
 
-        .gooey-nav-container .effect {
-          position: absolute;
-          left: 0;
-          top: 0;
-          width: 0;
-          height: 0;
-          opacity: 1;
-          pointer-events: none;
-          display: grid;
-          place-items: center;
-          z-index: 1;
-        }
-
-        .gooey-nav-container .effect.text {
-          color: #ffffff;
-          transition: color 0.3s ease;
-        }
-
-        .gooey-nav-container .effect.text.active {
-          color: #ffffff;
-        }
-
-        .gooey-nav-container .effect.filter {
-          filter: blur(7px) contrast(100) blur(0);
-          mix-blend-mode: lighten;
-        }
-
-        .gooey-nav-container .effect.filter::before {
-          content: '';
-          position: absolute;
-          inset: -75px;
-          z-index: -2;
-          background: black;
-        }
-
-        .gooey-nav-container .effect.filter::after {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: white;
-          transform: scale(0);
-          opacity: 0;
-          z-index: -1;
-          border-radius: 999px;
-        }
-
-        .gooey-nav-container .effect.active::after {
-          animation: pill 0.3s ease both;
-        }
-
-        @keyframes pill {
-          to {
-            transform: scale(1);
-            opacity: 1;
-          }
-        }
-
-        .particle,
-        .point {
-          display: block;
-          opacity: 0;
-          width: 20px;
-          height: 20px;
-          border-radius: 100%;
-          transform-origin: center;
-        }
-
-        .particle {
-          --time: 5s;
-          position: absolute;
-          top: calc(50% - 8px);
-          left: calc(50% - 8px);
-          animation: particle calc(var(--time)) ease 1 -350ms;
-        }
-
-        .point {
-          background: var(--color);
-          opacity: 1;
-          animation: point calc(var(--time)) ease 1 -350ms;
-        }
-
-        @keyframes particle {
-          0% {
-            transform: rotate(0deg) translate(calc(var(--start-x)), calc(var(--start-y)));
-            opacity: 1;
-            animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
-          }
-
-          70% {
-            transform: rotate(calc(var(--rotate) * 0.5)) translate(calc(var(--end-x) * 1.2), calc(var(--end-y) * 1.2));
-            opacity: 1;
-            animation-timing-function: ease;
-          }
-
-          85% {
-            transform: rotate(calc(var(--rotate) * 0.66)) translate(calc(var(--end-x)), calc(var(--end-y)));
-            opacity: 1;
-          }
-
-          100% {
-            transform: rotate(calc(var(--rotate) * 1.2)) translate(calc(var(--end-x) * 0.5), calc(var(--end-y) * 0.5));
-            opacity: 1;
-          }
-        }
-
-        @keyframes point {
-          0% {
-            transform: scale(0);
-            opacity: 0;
-            animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
-          }
-
-          25% {
-            transform: scale(calc(var(--scale) * 0.25));
-          }
-
-          38% {
-            opacity: 1;
-          }
-
-          65% {
-            transform: scale(var(--scale));
-            opacity: 1;
-            animation-timing-function: ease;
-          }
-
-          85% {
-            transform: scale(var(--scale));
-            opacity: 1;
-          }
-
-          100% {
-            transform: scale(0);
-            opacity: 0;
-          }
-        }
-
         @media (max-width: 1024px) {
-          .gooey-nav-container nav ul {
+          .gooey-nav-list {
             gap: 0.25rem;
           }
 
-          .gooey-nav-container nav ul li a {
+          .gooey-nav-item a {
             padding-inline: 0.85rem;
           }
         }
       `}</style>
-    </div>
+    </nav>
   );
 }
