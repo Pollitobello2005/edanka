@@ -12,6 +12,7 @@ const logos = [
   { name: 'Kraft', src: '/logos/kraft.svg' },
   { name: 'ManpowerGroup', src: '/logos/manpowergroup.svg' },
   { name: 'Mattel', src: '/logos/mattel.svg' },
+  { name: 'Net2Phone', src: '/logos/net2phone.svg' },
   { name: 'Pelikan', src: '/logos/pelikan.svg' },
   { name: 'Subway', src: '/logos/subway.svg' },
   { name: 'Under Armour', src: '/logos/underarmour.svg' },
