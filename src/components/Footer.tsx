@@ -27,9 +27,9 @@ export default function Footer() {
               <Image
                 src="/iconoedanka.png"
                 alt="Edanka"
-                width={72}
-                height={72}
-                className="w-18 h-18 object-contain"
+                width={144}
+                height={144}
+                className="w-36 h-36 object-contain"
               />
             </a>
             <p className="text-sm leading-relaxed mb-4" style={{ color: '#6B7280', maxWidth: '260px' }}>
