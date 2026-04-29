@@ -257,16 +257,8 @@
   .partner-track {
     animation-duration: 28s;
   }
-  .partner-track:hover {
-    animation-play-state: paused;
-  }
 }
 
-@media (min-width: 768px) {
-  .partner-track:hover {
-    animation-play-state: paused;
-  }
-}
 
 /* Misc helpers */
 .max-text-width { max-width: 680px; }
