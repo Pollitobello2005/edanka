@@ -58,20 +58,21 @@ export default function Products() {
                 key={pain.title}
                 initial={{ opacity: 0, y: 24 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`group card cursor-pointer transition-all duration-200 ${i % 2 === 0 ? 'md:mt-10' : 'md:mt-0'}`}
+                transition={{ duration: 0.8, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -4, scale: 1.01, borderColor: 'rgba(4,65,140,0.15)', boxShadow: '0 12px 30px rgba(0,0,0,0.06)' }}
+                className={`group card cursor-pointer transition-all duration-300 ${i % 2 === 0 ? 'md:mt-10' : 'md:mt-0'}`}
                 style={{ position: 'relative', overflow: 'visible' }}
               >
-                <span className="block absolute top-4 right-4 text-[56px] font-bold leading-none text-[#f3f4f6] select-none pointer-events-none" style={{ zIndex: 1 }}>
+                <span className="block absolute top-4 right-4 text-2xl md:text-[56px] font-bold leading-none text-[#f3f4f6] select-none pointer-events-none" style={{ zIndex: 1 }}>
                   {String(i + 1).padStart(2, '0')}
                 </span>
 
                 <div className="pr-16">
                   <h3 className="text-[#0F0F0F] font-medium text-[16px] mb-2 leading-snug">
-                  {pain.title}
+                    {pain.title}
                   </h3>
                   <p className="text-[14px] leading-relaxed" style={{ color: 'var(--color-text-body)' }}>
-                  {pain.description}
+                    {pain.description}
                   </p>
                 </div>
               </motion.div>

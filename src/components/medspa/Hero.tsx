@@ -157,7 +157,7 @@ export default function Hero() {
                 <ArrowRight size={18} />
               </Link>
               <a
-                href="https://wa.me/523344863113"
+                href="https://wa.me/523348663113"
                 target="_blank"
                 rel="noreferrer"
                 className="btn-ghost px-7 py-3.5 text-base font-medium flex items-center gap-2 rounded-lg"
@@ -175,71 +175,144 @@ export default function Hero() {
             className="relative hidden lg:flex justify-center"
             style={{ animation: 'float 6s ease-in-out infinite' }}
           >
+            {/* Main dashboard card (Apple UI/UX style) */}
             <div
-              className="relative rounded-2xl p-6 w-full max-w-md"
+              className="relative w-full max-w-md overflow-hidden"
               style={{
-                background: 'rgba(13,21,38,0.04)',
-                border: '1px solid rgba(13,21,38,0.1)',
-                backdropFilter: 'blur(16px)',
-                boxShadow: '0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(13,21,38,0.05)',
+                background: 'rgba(255, 255, 255, 0.85)',
+                backdropFilter: 'blur(30px)',
+                border: '1px solid rgba(0, 0, 0, 0.08)',
+                borderRadius: '24px',
+                boxShadow: '0 30px 60px -15px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.02)',
+                padding: '24px',
               }}
             >
-              <div className="flex items-center justify-between mb-5">
-                <div>
-                  <p className="text-xs font-medium mb-0.5" style={{ color: '#5A6A85' }}>Panel de clínica</p>
-                  <p className="text-[#0D1526] font-semibold text-base">Resumen en tiempo real</p>
+              {/* Window controls (Mac style) */}
+              <div className="flex items-center justify-between mb-6 pb-2" style={{ borderBottom: '1px solid rgba(0, 0, 0, 0.05)' }}>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#FF5F56' }} />
+                  <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#FFBD2E' }} />
+                  <span className="w-2.5 h-2.5 rounded-full" style={{ background: '#27C93F' }} />
+                  <span className="text-[10px] font-semibold tracking-wider uppercase ml-3" style={{ color: 'rgba(0, 0, 0, 0.4)' }}>
+                    Console OS · Live
+                  </span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400" style={{ boxShadow: '0 0 6px #00AAEC' }} />
-                  <span className="text-xs text-[#00AAEC] font-medium">En vivo</span>
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  </span>
+                  <span className="text-[9px] text-emerald-600 font-bold uppercase tracking-wider">Activo</span>
                 </div>
               </div>
 
-              <div className="grid grid-cols-3 gap-3 mb-5">
-                {dashboardMetrics.map((m) => {
-                  const Icon = m.icon;
-                  return (
-                    <div
-                      key={m.label}
-                      className="rounded-xl p-3"
-                      style={{ background: 'rgba(13,21,38,0.04)', border: '1px solid rgba(13,21,38,0.06)' }}
-                    >
-                      <div
-                        className="w-7 h-7 rounded-lg flex items-center justify-center mb-2"
-                        style={{ background: `${m.color}22` }}
-                      >
-                        <Icon size={14} style={{ color: m.color }} />
-                      </div>
-                      <p className="text-[#0D1526] font-bold text-base leading-none mb-1">
-                        <CountUp target={m.value} suffix={m.suffix} />
-                      </p>
-                      <p className="text-xs leading-tight" style={{ color: '#5A6A85' }}>{m.label}</p>
+              {/* Main Call Metric & Sparkline */}
+              <div className="mb-6">
+                <p className="text-[11px] font-bold uppercase tracking-wider mb-1" style={{ color: 'rgba(0, 0, 0, 0.4)' }}>
+                  Llamadas este mes
+                </p>
+                <div className="flex items-baseline gap-3">
+                  <h3 className="text-4xl font-extrabold tracking-tight text-[#0D1526] leading-none">
+                    <CountUp target={48291} />
+                  </h3>
+                  <span className="text-xs font-bold text-emerald-600 flex items-center gap-0.5 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
+                    ↑ 12.4%
+                  </span>
+                </div>
+
+                {/* Smooth Elegant SVG Sparkline */}
+                <div className="w-full h-12 mt-4 relative">
+                  <svg className="w-full h-full overflow-visible" viewBox="0 0 400 60">
+                    <defs>
+                      <linearGradient id="sparkline-grad-med" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#1A3A8F" stopOpacity="0.12" />
+                        <stop offset="100%" stopColor="#1A3A8F" stopOpacity="0.0" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      d="M 0,45 C 50,40 80,10 120,25 C 160,40 200,55 240,15 C 280,-15 320,30 360,5 C 380,-5 390,-2 400,2"
+                      fill="none"
+                      stroke="#1A3A8F"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M 0,45 C 50,40 80,10 120,25 C 160,40 200,55 240,15 C 280,-15 320,30 360,5 C 380,-5 390,-2 400,2 L 400,60 L 0,60 Z"
+                      fill="url(#sparkline-grad-med)"
+                    />
+                    <circle cx="400" cy="2" r="3.5" fill="#1A3A8F" stroke="#FFFFFF" strokeWidth="1.5" />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Sub-metrics */}
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="p-4 rounded-2xl" style={{ background: 'rgba(0, 0, 0, 0.02)', border: '1px solid rgba(0, 0, 0, 0.04)' }}>
+                  <p className="text-[10px] font-bold uppercase tracking-wider mb-1.5" style={{ color: 'rgba(0, 0, 0, 0.4)' }}>
+                    Citas agendadas
+                  </p>
+                  <p className="text-xl font-bold text-[#0D1526]"><CountUp target={1240} /></p>
+                </div>
+
+                <div className="p-4 rounded-2xl" style={{ background: 'rgba(0, 0, 0, 0.02)', border: '1px solid rgba(0, 0, 0, 0.04)' }}>
+                  <p className="text-[10px] font-bold uppercase tracking-wider mb-1.5" style={{ color: 'rgba(0, 0, 0, 0.4)' }}>
+                    Pacientes nuevos
+                  </p>
+                  <div className="flex items-center gap-2">
+                    <p className="text-xl font-bold text-[#0D1526]"><CountUp target={312} /></p>
+                    <div className="flex -space-x-1.5 ml-2">
+                      <span className="w-5 h-5 rounded-full flex items-center justify-center text-[8px] font-bold text-white" style={{ background: '#1A3A8F', border: '1.5px solid #FFFFFF' }}>MC</span>
+                      <span className="w-5 h-5 rounded-full flex items-center justify-center text-[8px] font-bold text-white" style={{ background: '#00AAEC', border: '1.5px solid #FFFFFF' }}>PT</span>
                     </div>
-                  );
-                })}
+                  </div>
+                </div>
               </div>
 
+              {/* Active Call Widget (Super realistic iPhone / Meta aesthetic) */}
               <div
-                className="rounded-xl p-4"
-                style={{ background: 'rgba(13,21,38,0.03)', border: '1px solid rgba(13,21,38,0.05)' }}
+                className="p-4 rounded-2xl"
+                style={{
+                  background: '#FFFFFF',
+                  border: '1px solid rgba(0, 0, 0, 0.05)',
+                  boxShadow: '0 4px 20px -5px rgba(0, 0, 0, 0.05)',
+                }}
               >
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs font-medium" style={{ color: '#5A6A85' }}>Citas agendadas (últimas 7h)</span>
-                  <span className="text-xs text-[#00AAEC] font-semibold">↑ 18%</span>
+                <div className="flex items-center justify-between mb-3.5">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold text-white" style={{ background: 'linear-gradient(135deg, #1A3A8F 0%, #00AAEC 100%)' }}>
+                      DR
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-[#0D1526] leading-none mb-0.5">Daniela Ríos</p>
+                      <p className="text-[9px] font-semibold text-emerald-600 flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        Llamada VoIP Activa
+                      </p>
+                    </div>
+                  </div>
+                  <span className="text-[10px] font-bold font-mono bg-slate-100 text-slate-600 px-2 py-0.5 rounded">
+                    01:15
+                  </span>
                 </div>
-                <div className="flex items-end gap-1.5 h-14">
-                  {[20, 35, 45, 80, 50, 90, 85].map((h, i) => (
+
+                {/* Clean audio wave animation */}
+                <div className="flex items-center justify-center gap-0.5 h-7">
+                  {[3, 5, 8, 4, 6, 9, 3, 5, 7, 4, 6, 8, 2, 4, 7, 3, 5, 8, 4, 6].map((h, i) => (
                     <motion.div
                       key={i}
-                      initial={{ scaleY: 0 }}
-                      animate={{ scaleY: 1 }}
-                      transition={{ duration: 0.6, delay: 0.8 + i * 0.07, ease: 'easeOut' }}
-                      className="flex-1 rounded-t-sm origin-bottom"
+                      animate={{
+                        height: [4, h * 2.8, 4],
+                      }}
+                      transition={{
+                        duration: 1.2,
+                        repeat: Infinity,
+                        delay: i * 0.06,
+                        ease: 'easeInOut',
+                      }}
+                      className="w-[2.5px] rounded-full"
                       style={{
-                        height: `${h}%`,
-                        background: i === 5
-                          ? 'linear-gradient(180deg, #1A3A8F, #00AAEC)'
-                          : 'rgba(26,58,143,0.3)',
+                        background: '#1A3A8F',
+                        opacity: 0.85,
                       }}
                     />
                   ))}

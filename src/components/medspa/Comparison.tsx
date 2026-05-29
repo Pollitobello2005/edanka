@@ -7,22 +7,22 @@ import { Check, X } from 'lucide-react';
 const comparisons = [
   {
     feature: 'Llamadas no contestadas',
-    edanka: 'Cero llamadas perdidas sin registro',
+    voxai: 'Cero llamadas perdidas sin registro',
     competitorNote: 'Pacientes que llaman y cuelgan',
   },
   {
     feature: 'Experiencia al paciente',
-    edanka: 'Recepción profesional desde el día 1',
+    voxai: 'Recepción profesional desde el día 1',
     competitorNote: 'WhatsApp personal sin control',
   },
   {
     feature: 'Crecimiento',
-    edanka: 'Escala cuando abres sucursal',
+    voxai: 'Escala cuando abres sucursal',
     competitorNote: 'Instalación nueva cada vez',
   },
   {
     feature: 'Atención al cliente',
-    edanka: 'Soporte directo en México',
+    voxai: 'Soporte directo en México',
     competitorNote: 'Call center genérico',
   },
 ];
@@ -77,12 +77,12 @@ export default function Comparison() {
               </span>
             </div>
             <div
-              className="py-4 px-6 col-edanka relative"
+              className="py-4 px-6 col-voxai relative"
               style={{ background: 'rgba(26,58,143,0.08)' }}
             >
               <div className="flex flex-col items-center">
                 <span className="text-sm font-black tracking-tight gradient-text">
-                  Con Edanka
+                  Con VOXAI
                 </span>
               </div>
             </div>
@@ -91,7 +91,7 @@ export default function Comparison() {
               style={{ background: 'rgba(13,21,38,0.02)' }}
             >
               <span className="text-sm font-semibold text-center block" style={{ color: '#5A6A85' }}>
-                Sin Edanka
+                Sin VOXAI
               </span>
             </div>
           </div>
@@ -125,7 +125,7 @@ export default function Comparison() {
                   <Check size={14} style={{ color: '#00AAEC' }} strokeWidth={2.5} />
                 </div>
                 <span className="text-sm font-semibold" style={{ color: '#0D1526' }}>
-                  {row.edanka}
+                  {row.voxai}
                 </span>
               </div>
 

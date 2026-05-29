@@ -85,7 +85,7 @@ export default function HowItWorks() {
                   initial={{ opacity: 0, y: 28 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: i * 0.15 }}
-                  className="edanka-card p-6 flex flex-col items-start"
+                  className="voxai-card p-6 flex flex-col items-start"
                 >
                   <div className="flex items-center gap-3 mb-5">
                     <div

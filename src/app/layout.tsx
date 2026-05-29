@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import WhatsAppWidget from "@/components/WhatsAppWidget";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -17,10 +18,10 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Edanka | Plataforma de comunicaciones en la nube para empresas en México",
+  title: "VOXAI | Plataforma de comunicaciones en la nube para empresas en México",
   description:
     "Centraliza llamadas, equipos y atención al cliente en una sola plataforma. Sin hardware. Sin complicaciones. Tecnología de net2phone. Implementación en 72 horas.",
-  keywords: "edanka, comunicaciones empresariales, net2phone, VoIP México, centralita virtual, contact center",
+  keywords: "voxai, comunicaciones empresariales, net2phone, VoIP México, centralita virtual, contact center",
   icons: {
     icon: [{ url: '/logo.ico', sizes: '32x32', type: 'image/x-icon' }],
   },
@@ -35,6 +36,7 @@ export default function RootLayout({
     <html lang="es" className={`${inter.variable} ${plusJakartaSans.variable}`} suppressHydrationWarning>
       <body className="antialiased font-sans">
         {children}
+        <WhatsAppWidget />
       </body>
     </html>
   );

@@ -13,7 +13,7 @@ const benefits = [
   {
     icon: Smartphone,
     title: 'Tu equipo atiende desde celular o computadora',
-    description: 'Si la recepcionista no está en el escritorio, puede contestar desde su celular con la app de Edanka.',
+    description: 'Si la recepcionista no está en el escritorio, puede contestar desde su celular con la app de VOXAI.',
   },
   {
     icon: Mic,
@@ -75,7 +75,7 @@ export default function Solutions() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="edanka-card group p-6 cursor-default"
+                className="voxai-card group p-6 cursor-default"
               >
                 <div
                   className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"

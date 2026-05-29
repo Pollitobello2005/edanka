@@ -7,37 +7,37 @@ import { useRef } from 'react';
 const comparisons = [
   {
     feature: 'Configurado en 72 hrs',
-    edanka: true,
+    voxai: true,
     competitor: false,
     competitorNote: 'Semanas de instalación',
   },
   {
     feature: 'Soporte directo en México',
-    edanka: true,
+    voxai: true,
     competitor: false,
     competitorNote: 'Call center genérico',
   },
   {
     feature: 'Pagas solo lo que usas',
-    edanka: true,
+    voxai: true,
     competitor: false,
     competitorNote: 'Contratos forzados',
   },
   {
     feature: 'Escala con tu empresa',
-    edanka: true,
+    voxai: true,
     competitor: false,
     competitorNote: 'Infraestructura fija',
   },
   {
     feature: 'App móvil incluida',
-    edanka: true,
+    voxai: true,
     competitor: false,
     competitorNote: 'Costo adicional',
   },
   {
     feature: 'Reportes en tiempo real',
-    edanka: true,
+    voxai: true,
     competitor: false,
     competitorNote: 'Reportes manuales',
   },
@@ -62,7 +62,7 @@ export default function Comparison() {
           <div className="section-rule mx-auto mb-5" />
           <h2 className="font-medium text-[#0F0F0F] leading-tight section-title mx-auto max-w-3xl">
             Por qué{' '}
-            <span className="gradient-text">Edanka · net2phone</span>{' '}
+            <span className="gradient-text">VOXAI · net2phone</span>{' '}
             y no tu operador actual
           </h2>
         </motion.div>
@@ -80,8 +80,8 @@ export default function Comparison() {
             <div className="px-6 py-5 border-l border-[#E5E7EB]">
               <span className="label-copy font-black" style={{ color: '#9ca3af' }}>Operador tradicional</span>
             </div>
-            <div className="px-6 py-5 border-l border-[#E5E7EB] col-edanka">
-              <span className="label-copy font-black" style={{ color: 'var(--primary)' }}>Edanka</span>
+            <div className="px-6 py-5 border-l border-[#E5E7EB] col-voxai">
+              <span className="label-copy font-black" style={{ color: 'var(--primary)' }}>VOXAI</span>
             </div>
           </div>
 
@@ -92,7 +92,7 @@ export default function Comparison() {
               animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.3 + i * 0.06 }}
                 className="grid grid-cols-[1.55fr_1fr_1fr]"
-              style={{ background: i % 2 === 0 ? '#FFFFFF' : 'var(--color-edanka-muted)' }}
+              style={{ background: i % 2 === 0 ? '#FFFFFF' : 'var(--color-voxai-muted)' }}
             >
               <div className="px-6 py-5 flex items-center">
                   <span style={{ color: '#374151', fontSize: '14px' }}>{row.feature}</span>
@@ -101,7 +101,7 @@ export default function Comparison() {
                 <span aria-hidden="true" style={{ color: '#9CA3AF', fontSize: '18px', fontWeight: 600 }}>—</span>
                   <span className="text-sm leading-tight" style={{ color: 'var(--color-text-body)' }}>{row.competitorNote}</span>
               </div>
-              <div className="px-6 py-5 flex items-center justify-center gap-3 border-l border-[#E5E7EB] col-edanka">
+              <div className="px-6 py-5 flex items-center justify-center gap-3 border-l border-[#E5E7EB] col-voxai">
                 <span style={{ color: '#16a34a', fontSize: '13px', fontWeight: 400 }}>Incluido</span>
               </div>
             </motion.div>
@@ -121,7 +121,7 @@ export default function Comparison() {
                   </div>
                 </div>
                 <div className="flex items-center justify-between gap-3 rounded-[10px] bg-[#f0f7ff] px-4 py-3">
-                  <span className="text-xs font-semibold label-copy text-[#9CA3AF]">Edanka</span>
+                  <span className="text-xs font-semibold label-copy text-[#9CA3AF]">VOXAI</span>
                   <div className="flex items-center gap-2">
                     <span style={{ color: '#16a34a', fontSize: '13px' }}>Incluido</span>
                   </div>

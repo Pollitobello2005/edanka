@@ -13,14 +13,13 @@ const logos = [
   { name: 'Kraft', src: '/logos/kraft.svg' },
   { name: 'ManpowerGroup', src: '/logos/manpowergroup.svg' },
   { name: 'Mattel', src: '/logos/mattel.svg' },
-  { name: 'Net2Phone', src: '/logos/net2phone.svg' },
   { name: 'Pelikan', src: '/logos/pelikan.svg' },
   { name: 'Subway', src: '/logos/subway.svg' },
   { name: 'Under Armour', src: '/logos/underarmour.svg' },
   { name: 'WeWork', src: '/logos/wework.svg' },
 ];
 
-const carouselLogos = [...logos, ...logos];
+const carouselLogos = [...logos, ...logos, ...logos, ...logos];
 
 export default function SocialProof() {
   const ref = useRef(null);
@@ -28,7 +27,7 @@ export default function SocialProof() {
 
   return (
     <section
-      className="section-shell section-surface-muted relative overflow-hidden"
+      className="py-8 md:py-16 section-surface-muted relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-6" ref={ref}>
         <motion.p
@@ -41,13 +40,34 @@ export default function SocialProof() {
           Empresas que ya confían en nosotros
         </motion.p>
 
-        <div className="partner-logos py-6 px-6">
-          <div className="partner-track">
-            {carouselLogos.map((logo, i) => (
-              <div key={`${logo.name}-${i}`} className="partner-logo flex items-center justify-center min-w-[100px] md:min-w-[140px]">
-                <Image src={logo.src} alt={`Logo de ${logo.name}`} width={140} height={64} className="max-h-12 w-auto object-contain" />
-              </div>
-            ))}
+        {/* Carousel container with gradient fading edges */}
+        <div className="relative w-full overflow-hidden py-8 px-6 my-4">
+          {/* Left and Right Fade Overlays */}
+          <div
+            className="absolute top-0 left-0 bottom-0 w-20 md:w-36 z-10 pointer-events-none"
+            style={{ background: 'linear-gradient(to right, var(--color-voxai-muted) 0%, transparent 100%)' }}
+          />
+          <div
+            className="absolute top-0 right-0 bottom-0 w-20 md:w-36 z-10 pointer-events-none"
+            style={{ background: 'linear-gradient(to left, var(--color-voxai-muted) 0%, transparent 100%)' }}
+          />
+
+          <div className="partner-logos">
+            <div className="partner-track">
+              {carouselLogos.map((logo, i) => (
+                <motion.div
+                  key={`${logo.name}-${i}`}
+                  className="partner-logo partner-logo-glow flex items-center justify-center min-w-[100px] md:min-w-[140px]"
+                  style={{
+                    animationDelay: `-${i * 320}ms`
+                  }}
+                  transition={{ ease: [0.16, 1, 0.3, 1] }}
+                  whileHover={{ y: -4, scale: 1.01 }}
+                >
+                  <Image src={logo.src} alt={`Logo de ${logo.name}`} width={140} height={64} className="max-h-12 w-auto object-contain" />
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
 

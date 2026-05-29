@@ -31,7 +31,7 @@ export default function Problem() {
     <section
       id="problema"
       className="relative section-shell"
-      style={{ background: 'var(--color-edanka-muted)' }}
+      style={{ background: 'var(--color-voxai-muted)' }}
     >
       <div
         className="absolute top-0 left-0 right-0 h-px"

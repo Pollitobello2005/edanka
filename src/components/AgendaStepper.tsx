@@ -61,7 +61,7 @@ export default function AgendaStepper() {
 
   if (submitted) {
     return (
-      <div className="edanka-card p-8 lg:p-10 bg-white/95 backdrop-blur-xl shadow-[0_30px_80px_rgba(13,21,38,0.12)] rounded-[28px] border border-[#E2E8F0] h-full flex items-center justify-center">
+      <div className="voxai-card p-8 lg:p-10 bg-white/95 backdrop-blur-xl shadow-[0_30px_80px_rgba(13,21,38,0.12)] rounded-[28px] border border-[#E2E8F0] h-full flex items-center justify-center">
         <div className="text-center max-w-md mx-auto">
           <div className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center" style={{ background: 'rgba(26,58,143,0.08)', color: '#1A3A8F' }}>
             <Sparkles size={28} />
