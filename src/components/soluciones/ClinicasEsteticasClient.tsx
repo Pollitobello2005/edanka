@@ -630,17 +630,17 @@ function PainRow({ icon: Icon, title, originalDesc, benefitDesc }: { icon: any; 
   const [hovered, setHovered] = useState(false);
   return (
     <div 
-      className="flex flex-col md:flex-row items-start md:items-center justify-between p-6 md:p-8 rounded-[12px] border border-white/[0.06] bg-[#0D1117] hover:border-[#1F6FEB]/30 hover:bg-[#111622] transition-all duration-200 gap-6 group cursor-default"
+      className="flex flex-col md:flex-row items-start md:items-center justify-between p-6 md:p-8 rounded-[12px] border border-[#E5E7EB] bg-white hover:border-[#1F6FEB]/30 hover:bg-[#F9FAFB] transition-all duration-200 gap-6 group cursor-default"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       <div className="flex items-start md:items-center gap-5 flex-1 w-full">
-        <div className="w-11 h-11 rounded-[12px] bg-red-500/10 border border-red-500/15 flex items-center justify-center text-red-500 group-hover:text-emerald-400 group-hover:bg-emerald-500/10 group-hover:border-emerald-500/15 transition-colors duration-200 shrink-0">
+        <div className="w-11 h-11 rounded-[12px] bg-red-50 border border-red-100 flex items-center justify-center text-red-500 group-hover:text-emerald-500 group-hover:bg-emerald-50 group-hover:border-emerald-100 transition-colors duration-200 shrink-0">
           <Icon size={20} strokeWidth={1.8} />
         </div>
         <div className="flex-1 min-w-0">
-          <h3 className="text-base font-bold text-white mb-1 tracking-tight">{title}</h3>
-          <p className="text-[13px] leading-relaxed text-slate-400 select-none min-h-[40px] md:min-h-[auto] transition-all duration-200">
+          <h3 className="text-base font-bold text-[#111827] mb-1 tracking-tight">{title}</h3>
+          <p className="text-[13px] leading-relaxed text-[#4B5563] select-none min-h-[40px] md:min-h-[auto] transition-all duration-200">
             {hovered ? benefitDesc : originalDesc}
           </p>
         </div>
@@ -650,8 +650,8 @@ function PainRow({ icon: Icon, title, originalDesc, benefitDesc }: { icon: any; 
         <span 
           className={`inline-flex items-center justify-center text-[11px] font-bold px-3 py-1.5 rounded-full border transition-all duration-200 w-32 ${
             hovered 
-              ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20' 
-              : 'text-red-500 bg-red-500/10 border-red-500/20'
+              ? 'text-emerald-600 bg-emerald-50 border-emerald-200' 
+              : 'text-red-600 bg-red-50 border-red-200'
           }`}
         >
           {hovered ? 'Con VoXAI' : 'Sin VoXAI'}
@@ -687,12 +687,12 @@ function PainSection() {
   ];
 
   return (
-    <section className="py-24 bg-[#05080F] border-t border-white/[0.04] overflow-hidden text-white">
+    <section className="py-24 bg-white border-t border-[#E5E7EB] overflow-hidden text-[#111827]">
       <div className="max-w-7xl mx-auto px-6" ref={ref}>
         <div className="text-center mb-16">
           <p className="text-[10px] font-black uppercase tracking-[0.22em] mb-3 text-red-500">¿RECONOCES ESTO?</p>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4">El verdadero costo de perder llamadas</h2>
-          <p className="text-sm text-slate-400 max-w-md mx-auto leading-relaxed">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-[#111827] tracking-tight mb-4">El verdadero costo de perder llamadas</h2>
+          <p className="text-sm text-[#4B5563] max-w-md mx-auto leading-relaxed">
             La mala comunicación destruye la experiencia de tus pacientes antes de que crucen tu puerta.
           </p>
         </div>
@@ -710,7 +710,7 @@ function PainSection() {
         </div>
 
         <div className={`text-center mt-12 transition-all duration-800 delay-500 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <span className="inline-block text-xs font-bold text-[#1F6FEB] bg-[#1F6FEB]/10 px-4 py-2 rounded-full border border-[#1F6FEB]/20">
+          <span className="inline-block text-xs font-bold text-[#1F6FEB] bg-[#1F6FEB]/05 px-4 py-2 rounded-full border border-[#1F6FEB]/10">
             VOXAI resuelve los tres. En 72 horas.
           </span>
         </div>
@@ -731,7 +731,7 @@ function CredibilitySection() {
   ];
 
   return (
-    <section className="py-20 bg-[#F8F9FA] border-t border-b border-slate-100 overflow-hidden">
+    <section className="py-20 bg-[#F9FAFB] border-t border-b border-slate-100 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6" ref={ref}>
         <div className="grid md:grid-cols-3 gap-10">
           {cols.map((c, i) => {
@@ -871,6 +871,34 @@ export default function ClinicasEsteticasClient() {
   const ripple = useRipple();
   const resultsRef = useRef<HTMLDivElement>(null);
   const resultsInView = useInView(resultsRef, { once: true, rootMargin: '-60px' });
+
+  useEffect(() => {
+    const counters = document.querySelectorAll('[data-count]');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !((entry.target as HTMLElement).dataset.animated)) {
+          (entry.target as HTMLElement).dataset.animated = 'true';
+          const target = parseFloat((entry.target as HTMLElement).dataset.count || '0');
+          const suffix = (entry.target as HTMLElement).dataset.suffix || '';
+          const duration = 1800;
+          const start = performance.now();
+          
+          const tick = (now: number) => {
+            const progress = Math.min((now - start) / duration, 1);
+            const ease = 1 - Math.pow(1 - progress, 3);
+            const current = Math.round(target * ease);
+            entry.target.textContent = current + suffix;
+            if (progress < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    counters.forEach(el => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   const checklist = [
     'Telefonía VoIP y PBX en la nube',
@@ -1165,7 +1193,13 @@ export default function ClinicasEsteticasClient() {
                 className={`text-center flex flex-col items-center justify-center px-6 md:px-10 transition-all duration-700 ${resultsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                 style={{ transitionDelay: `${i * 150}ms` }}
               >
-                <AnimatedCounter target={m.target} suffix={m.suffix} delay={m.delay} />
+                <div
+                  data-count={m.target}
+                  data-suffix={m.suffix}
+                  className="font-black text-[72px] leading-none mb-2 text-white"
+                >
+                  0
+                </div>
                 <p className="text-sm font-bold text-slate-200 mt-3">{m.sub}</p>
                 <p className="text-xs text-slate-500 mt-1 max-w-[180px]">{m.note}</p>
               </div>
