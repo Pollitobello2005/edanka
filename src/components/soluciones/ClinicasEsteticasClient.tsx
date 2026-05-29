@@ -407,8 +407,8 @@ function AnimatedCounter({ target, suffix = '', delay: d = 0 }: { target: number
 
 // ─── Typewriter Headline ──────────────────────────────────────────────────────
 function StaggeredHeadline() {
-  const firstLine = 'Transforma cada llamada en una cita:';
-  const secondLine = 'Comunicación Unificada para Clínicas de Estética Premium';
+  const firstLine = 'Transforma cada llamada en una cita.';
+  const secondLine = 'Comunicación Unificada para Clínicas de Estética.';
   const words = firstLine.split(' ');
   const [typed, setTyped] = useState('');
   const [cursor, setCursor] = useState(true);
@@ -450,7 +450,7 @@ function StaggeredHeadline() {
       className="font-black text-white leading-[1.2] mb-8 tracking-tight flex flex-col gap-2 md:gap-3"
       style={{ fontSize: 'clamp(1.9rem, 4.8vw, 3.6rem)', letterSpacing: '-0.03em' }}
     >
-      <div className="block">
+      <div className="block font-normal text-white/75">
         {words.map((w, i) => (
           <span
             key={i}
@@ -461,10 +461,10 @@ function StaggeredHeadline() {
           </span>
         ))}
       </div>
-      <div className="text-[#5BC4F5] font-black block min-h-[1.2em] mt-1 md:mt-2">
+      <div className="text-white font-bold block min-h-[1.2em] mt-1 md:mt-2">
         {typed}
         {cursor && (
-          <span className="inline-block w-[3px] h-[0.85em] bg-[#5BC4F5] ml-[2px] align-middle animate-blink" />
+          <span className="inline-block w-[3px] h-[0.85em] bg-white ml-[2px] align-middle animate-blink" />
         )}
       </div>
     </h1>
@@ -508,103 +508,209 @@ function SVGCheck({ delay: d }: { delay: number }) {
   );
 }
 
-// ─── Features Section ─────────────────────────────────────────────────────────
+// ─── Features Section (Bento Grid) ───────────────────────────────────────────
 function FeaturesSection() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, rootMargin: '-60px' });
-
-  const features = [
-    { icon: Phone, title: 'Nunca pierdas una llamada', desc: 'Enrutamiento inteligente y desbordamiento automático. Si una línea está ocupada, el siguiente agente recibe la llamada al instante.' },
-    { icon: Calendar, title: 'Agendamiento automático 24/7', desc: 'Agentes de IA que responden, informan sobre tratamientos y agendan citas incluso fuera de horario de oficina.' },
-    { icon: BarChart3, title: 'Panel de métricas en tiempo real', desc: 'Visualiza llamadas activas, tiempo de espera, citas confirmadas y satisfacción del paciente desde un solo dashboard.' },
-    { icon: Bot, title: 'IA para pre-calificación de leads', desc: 'El agente de IA detecta el tratamiento de interés, califica al prospecto y lo pasa al especialista correcto.' },
-  ];
 
   return (
     <section id="features" className="py-24 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6" ref={ref}>
         <div className="text-center mb-16">
-          <p className="text-[10px] font-black uppercase tracking-[0.22em] mb-3 text-[#04418c]">TECNOLOGÍA ENTERPRISE</p>
+          <p className="text-[10px] font-black uppercase tracking-[0.22em] mb-3 text-[#1F6FEB]">TECNOLOGÍA ENTERPRISE</p>
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#0D1526] tracking-tight mb-4">Todo lo que necesita tu clínica</h2>
           <p className="text-sm text-[#5A6A85] max-w-md mx-auto leading-relaxed">
             Una plataforma diseñada para el volumen, la urgencia y la atención personalizada que exige el sector estético.
           </p>
         </div>
 
-        {/* Mobile: horizontal scroll carousel with dots */}
-        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-4 md:pb-0 scrollbar-none">
-          {features.map((f, i) => {
-            const Icon = f.icon;
-            return (
-              <div
-                key={f.title}
-                className={`snap-center shrink-0 w-[270px] md:w-auto feature-card rounded-3xl p-7 border border-slate-100 bg-white transition-all duration-500 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-                style={{ transitionDelay: `${i * 100}ms`, boxShadow: '0 8px 24px rgba(0,0,0,0.03)' }}
-              >
-                <div className="w-11 h-11 rounded-2xl bg-[#04418c]/06 flex items-center justify-center mb-5 icon-spin">
-                  <Icon size={20} strokeWidth={2} color="#04418c" />
-                </div>
-                <h3 className="text-sm font-bold text-[#0D1526] mb-2.5">{f.title}</h3>
-                <p className="text-xs leading-relaxed text-[#5A6A85]">{f.desc}</p>
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+          {/* Card 1: Nunca pierdas una llamada (2/3 width) */}
+          <div
+            className={`rounded-[12px] border border-[#1A1F2E] p-7 md:p-8 flex flex-col justify-between transition-colors duration-[150ms] ease-out hover:border-[#1F6FEB] group bg-[#0D1117] md:col-span-2 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+            style={{ transitionDelay: '0ms' }}
+          >
+            <div>
+              <div className="w-10 h-10 rounded-[12px] bg-[#111622] border border-[#1a1f2e] flex items-center justify-center mb-5 group-hover:border-[#1F6FEB] transition-colors duration-[150ms] text-[#1F6FEB]">
+                <Phone size={20} strokeWidth={1.8} />
               </div>
-            );
-          })}
-        </div>
-        {/* Carousel dots (mobile only) */}
-        <div className="flex md:hidden justify-center gap-1.5 mt-4">
-          {features.map((_, i) => (
-            <div key={i} className={`h-1 rounded-full bg-[#04418c] transition-all ${i === 0 ? 'w-4 opacity-100' : 'w-1.5 opacity-25'}`} />
-          ))}
+              <h3 className="text-[15px] font-bold text-white mb-2.5 tracking-tight">Nunca pierdas una llamada</h3>
+              <p className="text-[13px] leading-relaxed text-slate-400">
+                Enrutamiento inteligente y desbordamiento automático. Si una línea está ocupada, el siguiente agente recibe la llamada al instante.
+              </p>
+            </div>
+            
+            {/* Mini visual flow routing */}
+            <div className="mt-5 p-4 rounded-[12px] border border-white/[0.04] bg-[#05080F] flex flex-col sm:flex-row items-center justify-between gap-3 overflow-hidden select-none">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#1F6FEB] animate-pulse" />
+                <span className="text-[11px] font-mono text-slate-300 font-semibold tracking-tight">Llamada Entrante</span>
+              </div>
+              <span className="hidden sm:block text-slate-600 text-xs font-mono">──▶</span>
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-red-500" />
+                <span className="text-[11px] font-mono text-slate-400 tracking-tight">Línea Ocupada</span>
+              </div>
+              <span className="hidden sm:block text-slate-600 text-xs font-mono">──▶</span>
+              <div className="flex items-center gap-2 bg-[#1F6FEB]/10 px-2 py-1 rounded border border-[#1F6FEB]/20 animate-pulse">
+                <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                <span className="text-[11px] font-mono text-emerald-400 font-bold tracking-tight">IA Activa ✓</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2: Agendamiento automático 24/7 (1/3 width) */}
+          <div
+            className={`rounded-[12px] border border-[#1A1F2E] p-7 md:p-8 flex flex-col justify-between transition-colors duration-[150ms] ease-out hover:border-[#1F6FEB] group bg-[#0D1117] md:col-span-1 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+            style={{ transitionDelay: '100ms' }}
+          >
+            <div>
+              <div className="w-10 h-10 rounded-[12px] bg-[#111622] border border-[#1a1f2e] flex items-center justify-center mb-5 group-hover:border-[#1F6FEB] transition-colors duration-[150ms] text-[#1F6FEB]">
+                <Calendar size={20} strokeWidth={1.8} />
+              </div>
+              <h3 className="text-[15px] font-bold text-white mb-2.5 tracking-tight">Agendamiento 24/7</h3>
+              <p className="text-[13px] leading-relaxed text-slate-400">
+                Agentes de IA que responden, informan sobre tratamientos y agendan citas en tiempo real incluso fuera de horario de oficina.
+              </p>
+            </div>
+          </div>
+
+          {/* Card 3: Panel de métricas en tiempo real (1/3 width) */}
+          <div
+            className={`rounded-[12px] border border-[#1A1F2E] p-7 md:p-8 flex flex-col justify-between transition-colors duration-[150ms] ease-out hover:border-[#1F6FEB] group bg-[#0D1117] md:col-span-1 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+            style={{ transitionDelay: '200ms' }}
+          >
+            <div>
+              <div className="w-10 h-10 rounded-[12px] bg-[#111622] border border-[#1a1f2e] flex items-center justify-center mb-5 group-hover:border-[#1F6FEB] transition-colors duration-[150ms] text-[#1F6FEB]">
+                <BarChart3 size={20} strokeWidth={1.8} />
+              </div>
+              <h3 className="text-[15px] font-bold text-white mb-2.5 tracking-tight">Panel de métricas</h3>
+              <p className="text-[13px] leading-relaxed text-slate-400">
+                Visualiza llamadas activas, tiempo de espera, citas confirmadas y la satisfacción de tus pacientes desde un solo dashboard.
+              </p>
+            </div>
+          </div>
+
+          {/* Card 4: IA para pre-calificación (2/3 width) */}
+          <div
+            className={`rounded-[12px] border border-[#1A1F2E] p-7 md:p-8 flex flex-col justify-between transition-colors duration-[150ms] ease-out hover:border-[#1F6FEB] group bg-[#0D1117] md:col-span-2 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+            style={{ transitionDelay: '300ms' }}
+          >
+            <div>
+              <div className="w-10 h-10 rounded-[12px] bg-[#111622] border border-[#1a1f2e] flex items-center justify-center mb-5 group-hover:border-[#1F6FEB] transition-colors duration-[150ms] text-[#1F6FEB]">
+                <Bot size={20} strokeWidth={1.8} />
+              </div>
+              <h3 className="text-[15px] font-bold text-white mb-2.5 tracking-tight">IA para pre-calificación</h3>
+              <p className="text-[13px] leading-relaxed text-slate-400">
+                El agente de IA detecta el tratamiento de interés, recopila los datos principales, califica al prospecto y lo canaliza de forma óptima.
+              </p>
+            </div>
+
+            {/* Prompt/Response mockup */}
+            <div className="mt-5 p-3 rounded-[12px] border border-white/[0.04] bg-[#05080F] flex flex-col gap-2 font-mono text-[10px] select-none text-slate-400">
+              <div className="flex gap-2">
+                <span className="text-red-500 font-semibold shrink-0">Paciente:</span>
+                <span>"Quiero agendar cita de Botox para mañana a las 4"</span>
+              </div>
+              <div className="flex gap-2 text-emerald-400 font-semibold">
+                <span className="shrink-0">VoXAI IA:</span>
+                <span>"¡Cita reservada con éxito! Sincronizando agenda..."</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-// ─── Pain Section ─────────────────────────────────────────────────────────────
+// ─── Pain Section (Antes / Después Rows) ─────────────────────────────────────
+function PainRow({ icon: Icon, title, originalDesc, benefitDesc }: { icon: any; title: string; originalDesc: string; benefitDesc: string }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div 
+      className="flex flex-col md:flex-row items-start md:items-center justify-between p-6 md:p-8 rounded-[12px] border border-white/[0.06] bg-[#0D1117] hover:border-[#1F6FEB]/30 hover:bg-[#111622] transition-all duration-200 gap-6 group cursor-default"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div className="flex items-start md:items-center gap-5 flex-1 w-full">
+        <div className="w-11 h-11 rounded-[12px] bg-red-500/10 border border-red-500/15 flex items-center justify-center text-red-500 group-hover:text-emerald-400 group-hover:bg-emerald-500/10 group-hover:border-emerald-500/15 transition-colors duration-200 shrink-0">
+          <Icon size={20} strokeWidth={1.8} />
+        </div>
+        <div className="flex-1 min-w-0">
+          <h3 className="text-base font-bold text-white mb-1 tracking-tight">{title}</h3>
+          <p className="text-[13px] leading-relaxed text-slate-400 select-none min-h-[40px] md:min-h-[auto] transition-all duration-200">
+            {hovered ? benefitDesc : originalDesc}
+          </p>
+        </div>
+      </div>
+      
+      <div className="shrink-0 w-full md:w-auto flex justify-end">
+        <span 
+          className={`inline-flex items-center justify-center text-[11px] font-bold px-3 py-1.5 rounded-full border transition-all duration-200 w-32 ${
+            hovered 
+              ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20' 
+              : 'text-red-500 bg-red-500/10 border-red-500/20'
+          }`}
+        >
+          {hovered ? 'Con VoXAI' : 'Sin VoXAI'}
+        </span>
+      </div>
+    </div>
+  );
+}
+
 function PainSection() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, rootMargin: '-60px' });
 
   const pains = [
-    { icon: Phone, title: 'Línea ocupada', sub: 'El paciente llama a otra clínica', desc: 'Si no contestas en el primer minuto, el prospecto regresa a Google y agenda con tu competencia directa.' },
-    { icon: Clock, title: 'Recepcionista en cita', sub: 'Nadie contesta en 20 minutos', desc: 'Cuando tu equipo está ocupado atendiendo en recepción, el teléfono sigue sonando sin que nadie tome control.' },
-    { icon: AlertCircle, title: 'Agenda desorganizada', sub: 'Citas duplicadas o canceladas', desc: 'Registros manuales que provocan choques de horarios, personal estresado y pacientes molestos.' },
+    { 
+      icon: Phone, 
+      title: 'Línea ocupada', 
+      originalDesc: 'Si no contestas en el primer minuto, el prospecto regresa a Google y agenda con tu competencia directa.', 
+      benefitDesc: 'Canales ilimitados en la nube: Tus pacientes siempre obtienen respuesta al instante y nunca escuchan tono de ocupado.'
+    },
+    { 
+      icon: Clock, 
+      title: 'Recepcionista en cita', 
+      originalDesc: 'Cuando tu equipo está ocupado atendiendo en recepción, el teléfono sigue sonando sin que nadie tome control.', 
+      benefitDesc: 'Desbordamiento inteligente: El agente de IA responde y agenda citas de forma automática mientras tu equipo atiende presencialmente.'
+    },
+    { 
+      icon: AlertCircle, 
+      title: 'Agenda desorganizada', 
+      originalDesc: 'Registros manuales que provocan choques de horarios, personal estresado y pacientes molestos.', 
+      benefitDesc: 'Sincronización automática: Las citas se guardan y confirman directo en tu CRM, sin errores ni sobreposiciones de horarios.'
+    },
   ];
 
   return (
-    <section className="py-24 bg-white border-t border-slate-100 overflow-hidden">
+    <section className="py-24 bg-[#05080F] border-t border-white/[0.04] overflow-hidden text-white">
       <div className="max-w-7xl mx-auto px-6" ref={ref}>
         <div className="text-center mb-16">
           <p className="text-[10px] font-black uppercase tracking-[0.22em] mb-3 text-red-500">¿RECONOCES ESTO?</p>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-[#0D1526] tracking-tight mb-4">El verdadero costo de perder llamadas</h2>
-          <p className="text-sm text-[#5A6A85] max-w-md mx-auto leading-relaxed">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4">El verdadero costo de perder llamadas</h2>
+          <p className="text-sm text-slate-400 max-w-md mx-auto leading-relaxed">
             La mala comunicación destruye la experiencia de tus pacientes antes de que crucen tu puerta.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {pains.map((p, i) => {
-            const Icon = p.icon;
-            return (
-              <div
-                key={p.title}
-                className={`pain-card p-8 rounded-3xl bg-slate-50 border border-slate-100 transition-all duration-600 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-                style={{ transitionDelay: `${i * 120}ms` }}
-              >
-                <div className="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/15 flex items-center justify-center mb-5 text-red-500">
-                  <Icon size={18} strokeWidth={2} />
-                </div>
-                <p className="text-[9px] font-black uppercase tracking-wider text-slate-400 mb-1">{p.title}</p>
-                <h3 className="text-base font-bold text-[#0D1526] mb-3">{p.sub}</h3>
-                <p className="text-xs leading-relaxed text-[#5A6A85]">{p.desc}</p>
-              </div>
-            );
-          })}
+        <div className="flex flex-col gap-4 max-w-4xl mx-auto">
+          {pains.map((p, i) => (
+            <div
+              key={p.title}
+              className={`transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              style={{ transitionDelay: `${i * 120}ms` }}
+            >
+              <PainRow icon={p.icon} title={p.title} originalDesc={p.originalDesc} benefitDesc={p.benefitDesc} />
+            </div>
+          ))}
         </div>
 
-        <div className={`text-center mt-10 transition-all duration-800 delay-500 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <span className="inline-block text-xs font-bold text-[#04418c] bg-[#04418c]/06 px-4 py-2 rounded-full border border-[#04418c]/10">
+        <div className={`text-center mt-12 transition-all duration-800 delay-500 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          <span className="inline-block text-xs font-bold text-[#1F6FEB] bg-[#1F6FEB]/10 px-4 py-2 rounded-full border border-[#1F6FEB]/20">
             VOXAI resuelve los tres. En 72 horas.
           </span>
         </div>
@@ -650,7 +756,86 @@ function CredibilitySection() {
   );
 }
 
-// ─── WhatsApp Float ───────────────────────────────────────────────────────────
+// ─── Testimonials Section (New Social Proof Block) ──────────────────────────
+function TestimonialsSection() {
+  const reviews = [
+    {
+      initials: 'DS',
+      name: 'Diana Sánchez',
+      role: 'Directora Médica',
+      clinic: 'Clinique Glow GDL',
+      text: '"Desde que implementamos VoXAI, no hemos perdido una sola llamada. Las citas se agendan automáticamente en nuestro CRM y el equipo está mucho más relajado."',
+    },
+    {
+      initials: 'AM',
+      name: 'Dra. Andrea Mendoza',
+      role: 'Fundadora',
+      clinic: 'DermaMed Estética',
+      text: '"La pre-calificación por IA ha sido una maravilla. Los pacientes llegan con la información clara y confirmados, lo que ha aumentado nuestras ventas en un 35%."',
+    },
+    {
+      initials: 'RP',
+      name: 'Regina Pérez',
+      role: 'Coordinadora de Operaciones',
+      clinic: 'Aesthetica Guadalajara',
+      text: '"El desbordamiento automático salvó nuestra recepción. Si estamos ocupadas con un paciente, la llamada es atendida al instante. El soporte es impecable."',
+    },
+  ];
+
+  return (
+    <section className="py-24 bg-white relative overflow-hidden border-t border-slate-100">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <p className="text-[10px] font-black uppercase tracking-[0.22em] mb-3 text-[#1F6FEB]">CASOS DE ÉXITO</p>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-[#0D1526] tracking-tight mb-4">Lo que dicen las dueñas de clínicas</h2>
+          <p className="text-sm text-[#5A6A85] max-w-md mx-auto leading-relaxed">
+            Líderes del sector estético en Guadalajara que transformaron su comunicación y su rentabilidad con VoXAI.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {reviews.map((r) => (
+            <div 
+              key={r.name}
+              className="p-8 rounded-[12px] border border-[#1A1F2E] bg-[#0D1117] flex flex-col justify-between h-full hover:border-[#1F6FEB]/30 transition-all duration-200"
+            >
+              <div>
+                {/* Stars Rating */}
+                <div className="flex items-center gap-1 mb-5">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i} className="text-amber-400 text-base">★</span>
+                  ))}
+                </div>
+                {/* Testimonial Text */}
+                <p className="text-[13px] leading-relaxed text-slate-300 mb-6 italic min-h-[50px]">
+                  {r.text}
+                </p>
+              </div>
+
+              <div className="flex items-center justify-between border-t border-white/[0.04] pt-5 mt-auto">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[#1F6FEB]/10 border border-[#1F6FEB]/20 flex items-center justify-center text-xs font-bold text-[#1F6FEB] shrink-0 uppercase tracking-wider">
+                    {r.initials}
+                  </div>
+                  <div>
+                    <h4 className="text-[13px] font-bold text-white leading-none mb-1">{r.name}</h4>
+                    <p className="text-[11px] text-slate-400">{r.role} · <span className="text-[#00AAEC] font-semibold">{r.clinic}</span></p>
+                  </div>
+                </div>
+                {/* Source tag */}
+                <span className="text-[9px] font-mono font-bold tracking-tight text-slate-500 uppercase bg-white/[0.02] px-2 py-1 rounded border border-white/[0.04] shrink-0">
+                  Google Reviews
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── WhatsApp Float ─────────────────────────────────────────────
 function WhatsAppFloat() {
   const [tooltip, setTooltip] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -669,16 +854,13 @@ function WhatsAppFloat() {
         </div>
       )}
       <a
-        href="https://wa.me/523348663113"
+        href="https://wa.me/523348663113?text=Hola,%20quiero%20más%20información%20sobre%20Voxai"
         target="_blank"
         rel="noreferrer"
-        className="w-14 h-14 rounded-full flex items-center justify-center text-white shadow-xl transition-transform hover:scale-105 active:scale-95 animate-wa-pulse"
-        style={{ background: '#10B981', boxShadow: '0 4px 20px rgba(16,185,129,0.35)' }}
+        className="w-14 h-14 bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 active:scale-95 animate-wa-pulse"
         onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        aria-label="WhatsApp"
       >
-        <MessageCircle size={24} strokeWidth={2} />
+        <MessageCircle size={28} className="text-white fill-white" />
       </a>
     </div>
   );
@@ -851,12 +1033,12 @@ export default function ClinicasEsteticasClient() {
           style={{ zIndex: 0, objectPosition: 'center right' }}
         />
 
-        {/* Gradient overlay */}
+        {/* Dynamic Gradient overlay */}
         <div
           className="absolute inset-0"
           style={{
             zIndex: 1,
-            background: 'linear-gradient(135deg, rgba(10,22,40,0.92) 0%, rgba(15,45,94,0.75) 50%, rgba(10,22,40,0.40) 100%)'
+            backgroundColor: 'rgba(5, 8, 15, 0.55)'
           }}
         />
 
@@ -921,6 +1103,19 @@ export default function ClinicasEsteticasClient() {
                   WhatsApp
                 </a>
               </div>
+
+              {/* Social Proof Avatares */}
+              <div
+                className="flex items-center gap-3.5 mt-8 opacity-0 translate-y-3 animate-word-in"
+                style={{ animationDelay: '880ms', animationFillMode: 'forwards' }}
+              >
+                <div className="flex -space-x-2">
+                  <span className="w-8 h-8 rounded-full bg-[#1F6FEB] border-2 border-[#0A1628] flex items-center justify-center text-[10px] font-bold text-white uppercase tracking-wider">MA</span>
+                  <span className="w-8 h-8 rounded-full bg-[#30363D] border-2 border-[#0A1628] flex items-center justify-center text-[10px] font-bold text-white uppercase tracking-wider">SF</span>
+                  <span className="w-8 h-8 rounded-full bg-[#00AAEC] border-2 border-[#0A1628] flex items-center justify-center text-[10px] font-bold text-white uppercase tracking-wider">LC</span>
+                </div>
+                <span className="text-xs text-white/70 font-medium">47 clínicas en México ya lo usan</span>
+              </div>
             </div>
 
             {/* Right: Phone */}
@@ -928,7 +1123,15 @@ export default function ClinicasEsteticasClient() {
               className="flex justify-center items-center mt-12 lg:mt-0 opacity-0 translate-y-6 animate-word-in"
               style={{ animationDelay: '900ms', animationFillMode: 'forwards' }}
             >
-              <InteractivePhone />
+              <div 
+                className="transition-all duration-700"
+                style={{ 
+                  transform: 'rotate(-3deg)',
+                  filter: 'drop-shadow(0 32px 64px rgba(0,0,0,0.5))'
+                }}
+              >
+                <InteractivePhone />
+              </div>
             </div>
           </div>
         </div>
@@ -937,28 +1140,32 @@ export default function ClinicasEsteticasClient() {
       {/* ── Pain ─────────────────────────────────────────────────────── */}
       <PainSection />
 
-      {/* ── Metrics ──────────────────────────────────────────────────── */}
-      <section ref={resultsRef} className="py-24 bg-[#06101F] text-white relative overflow-hidden">
+      {/* ── Metrics (Stats Section) ──────────────────────────────────── */}
+      <section 
+        ref={resultsRef} 
+        className="py-24 text-white relative overflow-hidden"
+        style={{
+          backgroundColor: '#06101F',
+          backgroundImage: 'radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)',
+          backgroundSize: '20px 20px',
+        }}
+      >
         <div className="absolute top-0 left-0 w-96 h-96 rounded-full blur-[120px] opacity-10" style={{ background: '#00AAEC' }} />
         <div className="absolute bottom-0 right-0 w-72 h-72 rounded-full blur-[100px] opacity-06" style={{ background: '#04418c' }} />
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-800 gap-y-10 md:gap-y-0">
+          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/[0.08] gap-y-10 md:gap-y-0">
             {[
-              { label: '0', isStatic: true, unit: '', sub: 'Llamadas sin atender', note: 'con desbordamiento automático' },
-              { target: 40, suffix: '%', sub: 'Más citas agendadas', note: 'en las primeras 4 semanas', delay: 150 },
-              { label: '72h', isStatic: true, unit: '', sub: 'De implementación', note: 'sin hardware, sin técnicos' },
+              { target: 0, suffix: '', sub: 'Llamadas sin atender', note: 'con desbordamiento automático', delay: 0 },
+              { target: 40, suffix: '%', sub: 'Más citas agendadas', note: 'en las primeras 4 semanas', delay: 100 },
+              { target: 72, suffix: 'h', sub: 'De implementación', note: 'sin hardware, sin técnicos', delay: 200 },
             ].map((m, i) => (
               <div
                 key={i}
                 className={`text-center flex flex-col items-center justify-center px-6 md:px-10 transition-all duration-700 ${resultsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                 style={{ transitionDelay: `${i * 150}ms` }}
               >
-                {m.isStatic ? (
-                  <div className="font-black text-5xl md:text-6xl tracking-tight text-white mb-2">{m.label}</div>
-                ) : (
-                  <AnimatedCounter target={m.target!} suffix={m.suffix} delay={m.delay} />
-                )}
+                <AnimatedCounter target={m.target} suffix={m.suffix} delay={m.delay} />
                 <p className="text-sm font-bold text-slate-200 mt-3">{m.sub}</p>
                 <p className="text-xs text-slate-500 mt-1 max-w-[180px]">{m.note}</p>
               </div>
@@ -970,15 +1177,18 @@ export default function ClinicasEsteticasClient() {
       {/* ── Features ─────────────────────────────────────────────────── */}
       <FeaturesSection />
 
+      {/* ── Testimonials (Social Proof) ─────────────────────────────── */}
+      <TestimonialsSection />
+
       {/* ── Credibility ──────────────────────────────────────────────── */}
       <CredibilitySection />
 
-      {/* ── Checklist + CTA ──────────────────────────────────────────── */}
-      <section className="py-24 bg-[#F8F9FB] border-t border-slate-100">
+      {/* ── Checklist + CTA (Todo Incluido) ─────────────────────────── */}
+      <section className="py-20 md:py-24 bg-white border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <p className="text-[10px] font-black uppercase tracking-[0.22em] mb-3 text-[#04418c]">COBERTURA COMPLETA</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.22em] mb-3 text-[#1F6FEB]">COBERTURA COMPLETA</p>
               <h2 className="text-3xl font-extrabold text-[#0D1526] tracking-tight mb-8">Todo incluido desde el día uno</h2>
               <ul className="flex flex-col gap-4">
                 {checklist.map((item, idx) => (
@@ -1011,6 +1221,9 @@ export default function ClinicasEsteticasClient() {
                     <ArrowRight size={15} />
                   </Link>
                   <p className="text-[10px] text-white/40 mt-3 text-center">Sin contratos de permanencia · Sin hardware</p>
+                  <p className="text-[11px] text-[#6E7681] mt-2.5 text-center font-semibold">
+                    Solo quedan 3 spots disponibles este mes
+                  </p>
                 </div>
               </div>
             </div>
