@@ -630,7 +630,7 @@ function PainRow({ icon: Icon, title, originalDesc, benefitDesc }: { icon: any; 
   const [hovered, setHovered] = useState(false);
   return (
     <div 
-      className="flex flex-col md:flex-row items-start md:items-center justify-between p-6 md:p-8 rounded-[12px] border border-[#E5E7EB] bg-white hover:border-[#1F6FEB]/30 hover:bg-[#F9FAFB] transition-all duration-200 gap-6 group cursor-default"
+      className="flex flex-col md:flex-row items-start md:items-center justify-between p-6 md:p-8 rounded-[12px] border border-[#E5E7EB] bg-[#F9FAFB] hover:bg-white hover:border-[#1F6FEB]/30 transition-all duration-200 gap-6 group cursor-default"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -640,7 +640,7 @@ function PainRow({ icon: Icon, title, originalDesc, benefitDesc }: { icon: any; 
         </div>
         <div className="flex-1 min-w-0">
           <h3 className="text-base font-bold text-[#111827] mb-1 tracking-tight">{title}</h3>
-          <p className="text-[13px] leading-relaxed text-[#4B5563] select-none min-h-[40px] md:min-h-[auto] transition-all duration-200">
+          <p className="text-[13px] leading-relaxed text-[#6B7280] select-none min-h-[40px] md:min-h-[auto] transition-all duration-200">
             {hovered ? benefitDesc : originalDesc}
           </p>
         </div>
@@ -692,7 +692,7 @@ function PainSection() {
         <div className="text-center mb-16">
           <p className="text-[10px] font-black uppercase tracking-[0.22em] mb-3 text-red-500">¿RECONOCES ESTO?</p>
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#111827] tracking-tight mb-4">El verdadero costo de perder llamadas</h2>
-          <p className="text-sm text-[#4B5563] max-w-md mx-auto leading-relaxed">
+          <p className="text-sm text-[#6B7280] max-w-md mx-auto leading-relaxed">
             La mala comunicación destruye la experiencia de tus pacientes antes de que crucen tu puerta.
           </p>
         </div>
@@ -866,6 +866,51 @@ function WhatsAppFloat() {
   );
 }
 
+// ─── Video Section ───────────────────────────────────────────────────────────
+function VideoSection() {
+  return (
+    <section className="py-24 bg-[#05080F] text-center overflow-hidden border-t border-b border-white/[0.04]">
+      <div className="max-w-4xl mx-auto px-6">
+        <h2 className="text-[28px] font-extrabold text-white tracking-tight leading-snug mb-3">
+          Escucha cómo suena una clínica que nunca pierde una llamada
+        </h2>
+        <p className="text-base text-[#6B7280] font-medium mb-10">
+          Demo real. Sin actores.
+        </p>
+        
+        <div className="relative aspect-[16/9] w-full max-w-[720px] mx-auto rounded-[12px] bg-[#0D1117] border border-[#1F2937] flex flex-col items-center justify-center gap-4 overflow-hidden group hover:border-[#1F6FEB]/30 transition-all duration-300">
+          <div className="w-16 h-16 rounded-full bg-[#111622] border border-[#1F2937] flex items-center justify-center text-[#1F6FEB] group-hover:scale-105 transition-transform duration-300">
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="48" 
+              height="48" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="1.8" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+              className="text-[#1F6FEB] translate-x-[2px]"
+            >
+              <polygon points="6 3 20 12 6 21 6 3" fill="currentColor" />
+            </svg>
+          </div>
+          <span className="text-sm font-semibold tracking-tight text-[#374151]">
+            Video demo próximamente
+          </span>
+        </div>
+
+        <p className="text-sm text-slate-400 mt-8">
+          ¿Quieres ver una demo en vivo?{' '}
+          <Link href="/agenda-reunion" className="text-[#1F6FEB] font-bold hover:underline">
+            Agenda una llamada
+          </Link>
+        </p>
+      </div>
+    </section>
+  );
+}
+
 // ─── Main Export ──────────────────────────────────────────────────────────────
 export default function ClinicasEsteticasClient() {
   const ripple = useRipple();
@@ -873,28 +918,29 @@ export default function ClinicasEsteticasClient() {
   const resultsInView = useInView(resultsRef, { once: true, rootMargin: '-60px' });
 
   useEffect(() => {
-    const counters = document.querySelectorAll('[data-count]');
+    const counters = document.querySelectorAll('[data-target]');
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting && !((entry.target as HTMLElement).dataset.animated)) {
-          (entry.target as HTMLElement).dataset.animated = 'true';
-          const target = parseFloat((entry.target as HTMLElement).dataset.count || '0');
-          const suffix = (entry.target as HTMLElement).dataset.suffix || '';
+        const el = entry.target as HTMLElement;
+        if (entry.isIntersecting && !(el.dataset.done === 'true')) {
+          el.dataset.done = 'true';
+          const target = parseFloat(el.dataset.target || '0');
+          const suffix = el.dataset.suffix || '';
           const duration = 1800;
           const start = performance.now();
           
           const tick = (now: number) => {
             const progress = Math.min((now - start) / duration, 1);
-            const ease = 1 - Math.pow(1 - progress, 3);
+            const ease = 1 - Math.pow(1 - progress, 3); // cubic ease-out
             const current = Math.round(target * ease);
-            entry.target.textContent = current + suffix;
+            el.textContent = current + suffix;
             if (progress < 1) requestAnimationFrame(tick);
           };
           requestAnimationFrame(tick);
         }
       });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.5 });
 
     counters.forEach(el => observer.observe(el));
     return () => observer.disconnect();
@@ -1049,7 +1095,7 @@ export default function ClinicasEsteticasClient() {
       <Navbar darkHero />
 
       {/* ── Hero ─────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[95vh] flex items-center pt-24 pb-20 overflow-hidden">
+      <section className="relative min-h-[95vh] flex items-center pt-40 pb-20 overflow-hidden">
 
         {/* Background image */}
         <Image
@@ -1165,6 +1211,31 @@ export default function ClinicasEsteticasClient() {
         </div>
       </section>
 
+      {/* ── Client Logos ────────────────────────────────────────────── */}
+      <section className="py-12 bg-white border-b border-slate-100">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <p className="text-[13px] font-medium text-[#9CA3AF] tracking-wide mb-6 uppercase">
+            Con la confianza de clínicas en Guadalajara
+          </p>
+          <div className="grid grid-cols-2 md:flex md:flex-wrap md:justify-center md:items-center gap-x-8 gap-y-6 md:gap-x-12 select-none">
+            {[
+              'Clínica Glow',
+              'Centro Estético Lumina',
+              'MedSpa Andares',
+              'Skin Lab GDL',
+              'Estética Médica Providencia',
+            ].map((logo) => (
+              <span
+                key={logo}
+                className="text-[15px] font-semibold text-[#D1D5DB] tracking-tight hover:text-[#9CA3AF] transition-colors"
+              >
+                {logo}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── Pain ─────────────────────────────────────────────────────── */}
       <PainSection />
 
@@ -1194,7 +1265,7 @@ export default function ClinicasEsteticasClient() {
                 style={{ transitionDelay: `${i * 150}ms` }}
               >
                 <div
-                  data-count={m.target}
+                  data-target={m.target}
                   data-suffix={m.suffix}
                   className="font-black text-[72px] leading-none mb-2 text-white"
                 >
@@ -1213,6 +1284,9 @@ export default function ClinicasEsteticasClient() {
 
       {/* ── Testimonials (Social Proof) ─────────────────────────────── */}
       <TestimonialsSection />
+
+      {/* ── Video Demo Section ───────────────────────────────────────── */}
+      <VideoSection />
 
       {/* ── Credibility ──────────────────────────────────────────────── */}
       <CredibilitySection />
