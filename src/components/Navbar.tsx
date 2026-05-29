@@ -66,9 +66,9 @@ export default function Navbar({ darkHero = false }: { darkHero?: boolean }) {
       >
         <nav className="max-w-7xl mx-auto px-6 h-40 flex items-center justify-between gap-4">
           {/* Logo */}
-          <a href="#" className="flex items-center group -translate-y-8 transform">
+          <Link href="/" className="flex items-center group -translate-y-8 transform">
             <Logo isWhite={showWhiteLogo} />
-          </a>
+          </Link>
 
           {/* Desktop nav — pill container with mega menu + plain links */}
           <div className="hidden md:flex flex-1 justify-center -translate-y-8 transform">

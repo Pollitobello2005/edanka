@@ -3,6 +3,8 @@
 import { Zap, Phone, Mail, MapPin } from 'lucide-react';
 import Image from 'next/image';
 
+import Link from 'next/link';
+
 export default function Footer() {
   return (
     <footer
@@ -16,7 +18,7 @@ export default function Footer() {
 
           {/* Brand */}
           <div>
-            <a href="#" className="flex items-center gap-2 mb-4">
+            <Link href="/" className="flex items-center gap-2 mb-4">
               <Image
                 src="/logofinal.svg"
                 alt="VOXAI"
@@ -24,7 +26,7 @@ export default function Footer() {
                 height={48}
                 className="w-36 h-auto object-contain"
               />
-            </a>
+            </Link>
             <p className="text-sm leading-relaxed mb-4" style={{ color: '#6B7280', maxWidth: '320px' }}>
               Soluciones de comunicación unificada para PyMEs: VoIP, agentes de IA, automatización y software a medida. Partners oficiales de net2phone.
             </p>
