@@ -632,9 +632,10 @@ function PainRow({ icon: Icon, title, originalDesc, benefitDesc }: { icon: React
   const [hovered, setHovered] = useState(false);
   return (
     <div 
-      className="flex flex-col md:flex-row items-start md:items-center justify-between p-6 md:p-8 rounded-[12px] border border-[#E5E7EB] bg-[#F9FAFB] hover:bg-white hover:border-[#1F6FEB]/30 transition-all duration-200 gap-6 group cursor-default"
+      className="flex flex-col md:flex-row items-start md:items-center justify-between p-6 md:p-8 rounded-[12px] border border-[#E5E7EB] bg-[#F9FAFB] hover:bg-white hover:border-[#1F6FEB]/30 transition-all duration-200 gap-6 group cursor-pointer"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onClick={() => setHovered(prev => !prev)}
     >
       <div className="flex items-start md:items-center gap-5 flex-1 w-full">
         <div className="w-11 h-11 rounded-[12px] bg-red-50 border border-red-100 flex items-center justify-center text-red-500 group-hover:text-emerald-500 group-hover:bg-emerald-50 group-hover:border-emerald-100 transition-colors duration-200 shrink-0">
@@ -648,7 +649,7 @@ function PainRow({ icon: Icon, title, originalDesc, benefitDesc }: { icon: React
         </div>
       </div>
       
-      <div className="shrink-0 w-full md:w-auto flex justify-end">
+      <div className="shrink-0 w-full md:w-auto flex flex-col items-end gap-1">
         <span 
           className={`inline-flex items-center justify-center text-[11px] font-bold px-3 py-1.5 rounded-full border transition-all duration-200 w-32 ${
             hovered 
@@ -657,6 +658,9 @@ function PainRow({ icon: Icon, title, originalDesc, benefitDesc }: { icon: React
           }`}
         >
           {hovered ? 'Con VoXAI' : 'Sin VoXAI'}
+        </span>
+        <span className="text-[9px] text-[#9CA3AF] block md:hidden select-none mr-2">
+          (Toca para cambiar)
         </span>
       </div>
     </div>
@@ -1097,7 +1101,7 @@ export default function ClinicasEsteticasClient() {
       <Navbar darkHero />
 
       {/* ── Hero ─────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[95vh] flex items-center pt-40 pb-20 overflow-hidden">
+      <section className="relative min-h-[95vh] flex items-center pt-28 md:pt-40 pb-12 md:pb-20 overflow-hidden">
 
         {/* Background image */}
         <Image

@@ -59,6 +59,13 @@ export default function GooeyNav({ items, initialActiveIndex = 0 }: GooeyNavProp
         .gooey-nav {
           display: inline-flex;
           align-items: center;
+          max-width: 100%;
+          overflow-x: auto;
+          scrollbar-width: none;
+        }
+        
+        .gooey-nav::-webkit-scrollbar {
+          display: none;
         }
 
         .gooey-nav-list {

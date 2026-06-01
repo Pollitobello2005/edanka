@@ -22,8 +22,8 @@ export default function StickyBar() {
 
   return (
     <div
-      className={`fixed top-0 left-0 right-0 z-50 bg-[#0A1628] h-12 flex items-center justify-between px-6 shadow-lg border-b border-white/5 transition-all duration-300 ${
-        visible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
+      className={`fixed bottom-0 left-0 right-0 z-40 bg-[#0A1628] h-12 flex items-center justify-between px-6 shadow-lg border-t border-white/5 transition-all duration-300 ${
+        visible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
       }`}
     >
       {/* Left: label — hidden on mobile */}

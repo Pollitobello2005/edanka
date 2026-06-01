@@ -10,7 +10,6 @@ export default function CalEmbed() {
       cal('ui', {
         theme: 'light',
         hideEventTypeDetails: false,
-        layout: 'month_view',
         cssVarsPerTheme: {
           light: {
             'cal-brand': '#04418c',
@@ -32,7 +31,7 @@ export default function CalEmbed() {
       namespace="voxaimx"
       calLink="voxaimx"
       style={{ width: '100%', height: '100%', overflow: 'scroll' }}
-      config={{ layout: 'month_view', theme: 'light' }}
+      config={{ theme: 'light' }}
     />
   );
 }

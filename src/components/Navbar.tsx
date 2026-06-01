@@ -64,14 +64,14 @@ export default function Navbar({ darkHero = false }: { darkHero?: boolean }) {
           borderBottom: scrolled ? '1px solid rgba(13,21,38,0.06)' : '1px solid transparent',
         }}
       >
-        <nav className="max-w-7xl mx-auto px-6 h-40 flex items-center justify-between gap-4">
+        <nav className="max-w-7xl mx-auto px-6 h-20 md:h-24 flex items-center justify-between gap-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center group -translate-y-8 transform">
+          <Link href="/" className="flex items-center group">
             <Logo isWhite={showWhiteLogo} />
           </Link>
 
           {/* Desktop nav — pill container with mega menu + plain links */}
-          <div className="hidden md:flex flex-1 justify-center -translate-y-8 transform">
+          <div className="hidden md:flex flex-1 justify-center">
             <ul
               style={{
                 display: 'inline-flex',
@@ -111,7 +111,7 @@ export default function Navbar({ darkHero = false }: { darkHero?: boolean }) {
           </div>
 
           {/* CTA */}
-          <div className="flex items-center gap-3 -translate-y-8 transform">
+          <div className="flex items-center gap-3">
             <motion.div whileHover={{ scale: 1.03, y: -0.5 }} whileTap={{ scale: 0.97 }} transition={{ type: "spring", stiffness: 450, damping: 15 }}>
               <Link
                 href="/agenda-reunion"
@@ -124,7 +124,7 @@ export default function Navbar({ darkHero = false }: { darkHero?: boolean }) {
 
           {/* Mobile burger */}
           <button
-            className="md:hidden text-[#0F0F0F] p-2 -translate-y-6 transform"
+            className="md:hidden text-[#0F0F0F] p-2"
             onClick={() => setMobileOpen(v => !v)}
             aria-label="Menú"
           >
@@ -142,34 +142,96 @@ export default function Navbar({ darkHero = false }: { darkHero?: boolean }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.25 }}
-            className="fixed top-16 left-0 right-0 z-40 px-6 py-6 flex flex-col gap-4"
+            className="fixed top-20 md:top-24 left-0 right-0 bottom-0 z-40 px-6 py-8 flex flex-col gap-6 overflow-y-auto"
             style={{
-              background: 'rgba(255,255,255,0.98)',
-              borderBottom: '1px solid rgba(13,21,38,0.08)',
-              backdropFilter: 'blur(20px)',
+              background: 'rgba(255,255,255,0.99)',
+              backdropFilter: 'blur(24px)',
             }}
           >
-            {[
-              { label: 'UCaaS', href: '/products/ucaas' },
-              { label: 'Contact Center', href: '/products/ucontact' },
-              { label: 'Agentes de IA', href: '/products/agentes-ia' },
-            ].map((link) => (
+            {/* Productos */}
+            <div>
+              <p className="text-[11px] uppercase font-bold text-slate-400 tracking-wider mb-3">Productos</p>
+              <div className="flex flex-col gap-4 pl-1">
+                {[
+                  { label: 'UCaaS', href: '/products/ucaas', desc: 'Telefonía PBX, videollamadas y mensajería' },
+                  { label: 'Contact Center', href: '/products/ucontact', desc: 'uContact · Atención al cliente omnicanal' },
+                  { label: 'Agentes de IA', href: '/products/agentes-ia', desc: 'Atención conversacional automática 24/7' },
+                ].map((link) => (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    className="group flex flex-col"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <span className="text-[#0F0F0F] font-bold text-sm group-hover:text-[#04418c] transition-colors">{link.label}</span>
+                    <span className="text-xs text-slate-500 mt-0.5">{link.desc}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div style={{ borderTop: '1px solid rgba(13,21,38,0.06)' }} />
+
+            {/* Soluciones por Industria */}
+            <div>
+              <p className="text-[11px] uppercase font-bold text-slate-400 tracking-wider mb-3">Por Industria</p>
+              <div className="flex flex-col gap-4 pl-1">
+                {[
+                  { label: 'Clínicas Estéticas', href: '/soluciones/clinicas-esteticas', desc: 'Agenda automática & atención 24/7 sin perder llamadas' },
+                  { label: 'Inmobiliarias', href: '/soluciones/inmobiliarias', desc: 'Captura y calificación inmediata de leads' },
+                  { label: 'Logística', href: '/soluciones/logistica', desc: 'Coordinación y notificaciones en tiempo real' },
+                ].map((link) => (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    className="group flex flex-col"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <span className="text-[#0F0F0F] font-bold text-sm group-hover:text-[#04418c] transition-colors">{link.label}</span>
+                    <span className="text-xs text-slate-500 mt-0.5">{link.desc}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div style={{ borderTop: '1px solid rgba(13,21,38,0.06)' }} />
+
+            {/* Servicios */}
+            <div>
+              <p className="text-[11px] uppercase font-bold text-slate-400 tracking-wider mb-3">Servicios</p>
+              <div className="flex flex-col gap-4 pl-1">
+                {[
+                  { label: 'Desarrollo a medida', href: '/soluciones/desarrollo-medida', desc: 'Integraciones de sistemas y software personalizado' },
+                  { label: 'Automatizaciones', href: '/soluciones/automatizaciones', desc: 'Flujos y procesos automáticos sin intervención manual' },
+                ].map((link) => (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    className="group flex flex-col"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <span className="text-[#0F0F0F] font-bold text-sm group-hover:text-[#04418c] transition-colors">{link.label}</span>
+                    <span className="text-xs text-slate-500 mt-0.5">{link.desc}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div style={{ borderTop: '1px solid rgba(13,21,38,0.06)', marginTop: '4px' }} />
+
+            {/* CTA */}
+            <div className="mt-2 flex flex-col gap-3">
               <Link
-                key={link.label}
-                href={link.href}
-                className="text-[#0F0F0F] font-medium text-base py-2"
+                href="/agenda-reunion"
+                className="btn-primary py-3.5 text-center text-sm font-semibold rounded-xl"
                 onClick={() => setMobileOpen(false)}
               >
-                {link.label}
+                Solicitar demo gratis
               </Link>
-            ))}
-            <Link
-              href="/agenda-reunion"
-              className="btn-primary py-3 text-center text-sm font-semibold mt-2"
-              onClick={() => setMobileOpen(false)}
-            >
-              Solicitar demo
-            </Link>
+              <p className="text-[10px] text-slate-400 text-center uppercase tracking-widest font-bold">
+                Implementación en 72 horas · Sin contratos de permanencia
+              </p>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
