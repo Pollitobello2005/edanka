@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, type KeyboardEvent, type MouseEvent } from 'react';
+import { useRouter } from 'next/navigation';
 
 type GooeyNavItem = {
   label: string;
@@ -14,6 +15,7 @@ type GooeyNavProps = {
 
 export default function GooeyNav({ items, initialActiveIndex = 0 }: GooeyNavProps) {
   const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
+  const router = useRouter();
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement>, index: number) => {
     event.preventDefault();
@@ -28,7 +30,7 @@ export default function GooeyNav({ items, initialActiveIndex = 0 }: GooeyNavProp
       return;
     }
 
-    window.location.href = href;
+    router.push(href);
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLAnchorElement>, index: number) => {

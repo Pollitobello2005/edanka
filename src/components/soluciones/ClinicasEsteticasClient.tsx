@@ -220,7 +220,7 @@ function InteractivePhone() {
                 </div>
                 <div>
                   <p className="text-[9px] font-extrabold uppercase tracking-[0.2em] text-[#00AAEC] mb-1">Agente IA activo</p>
-                  <p className="text-sm font-bold text-white">"Buscando disponibilidad..."</p>
+                  <p className="text-sm font-bold text-white">&quot;Buscando disponibilidad...&quot;</p>
                 </div>
                 <div className="flex gap-1.5 mt-2">
                   {[0, 1, 2].map(i => (
@@ -315,7 +315,9 @@ function CustomCursor() {
 
   useEffect(() => {
     if (!window.matchMedia('(pointer: fine)').matches) return;
-    setVisible(true);
+    requestAnimationFrame(() => {
+      setVisible(true);
+    });
 
     const onMove = (e: MouseEvent) => {
       mouse.current = { x: e.clientX, y: e.clientY };
@@ -611,11 +613,11 @@ function FeaturesSection() {
             <div className="mt-5 p-3 rounded-[12px] border border-white/[0.04] bg-[#05080F] flex flex-col gap-2 font-mono text-[10px] select-none text-slate-400">
               <div className="flex gap-2">
                 <span className="text-red-500 font-semibold shrink-0">Paciente:</span>
-                <span>"Quiero agendar cita de Botox para mañana a las 4"</span>
+                <span>&quot;Quiero agendar cita de Botox para mañana a las 4&quot;</span>
               </div>
               <div className="flex gap-2 text-emerald-400 font-semibold">
                 <span className="shrink-0">VoXAI IA:</span>
-                <span>"¡Cita reservada con éxito! Sincronizando agenda..."</span>
+                <span>&quot;¡Cita reservada con éxito! Sincronizando agenda...&quot;</span>
               </div>
             </div>
           </div>
@@ -626,7 +628,7 @@ function FeaturesSection() {
 }
 
 // ─── Pain Section (Antes / Después Rows) ─────────────────────────────────────
-function PainRow({ icon: Icon, title, originalDesc, benefitDesc }: { icon: any; title: string; originalDesc: string; benefitDesc: string }) {
+function PainRow({ icon: Icon, title, originalDesc, benefitDesc }: { icon: React.ComponentType<{ size?: number; strokeWidth?: number }>; title: string; originalDesc: string; benefitDesc: string }) {
   const [hovered, setHovered] = useState(false);
   return (
     <div 

@@ -33,6 +33,10 @@ export default function AgentesIAPage() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [demoQuery, setDemoQuery] = useState<number>(0);
 
+  const toggleFaq = (index: number) => {
+    setActiveFaq(prev => (prev === index ? null : index));
+  };
+
   const tabsInfo = {
     citas: {
       title: 'Agenda de Citas Automatizada',
